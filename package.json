@@ -20,8 +20,14 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "avd": "C:\\Users\\jrodr\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe -avd Pixel_XL_API_33_1",
-    "lint": "eslint . --fix",
-    "format": "prettier  --write ."
+    "prettier:base": "prettier --ignore-path .gitignore",
+    "eslint:base": "eslint --ignore-path .gitignore",
+    "lint:eslint": "yarn eslint:base -- --max-warnings 0 \"**/*.{js,ts,tsx,mdx}\"",
+    "lint:eslint-config-prettier": "eslint --print-config .eslintrc | eslint-config-prettier-check",
+    "lint": "yarn lint:eslint",
+    "format:prettier": "yarn prettier:base -- --write \"**/*.{js,ts,tsx,json,md,mdx}\"",
+    "format:eslint": "yarn eslint:base -- --fix \"**/*.{js,ts,tsx,mdx}\"",
+    "format": "yarn format:eslint && yarn format:prettier"
   },
   "version": "1.0.0",
   "private": true,

@@ -1,0 +1,16 @@
+name: CI ~ Validate Code Style
+
+on: [ push ]
+
+jobs:
+  build:
+    name: Check code style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Running Prettier and Eslint
+        run: yarn format
