@@ -7,14 +7,21 @@
     "react-native-web": "~0.18.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.3"
+    "@babel/core": "^7.19.3",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^2.8.4"
   },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "avd": "C:\\Users\\jrodr\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe -avd Pixel_XL_API_33_1"
+    "avd": "C:\\Users\\jrodr\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe -avd Pixel_XL_API_33_1",
+    "lint": "eslint . --fix",
+    "format": "prettier  --write ."
   },
   "version": "1.0.0",
   "private": true,
