@@ -13,7 +13,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "avd": "C:\\Users\\jrodr\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe -avd Pixel_XL_API_33_1"
   },
   "version": "1.0.0",
   "private": true,
