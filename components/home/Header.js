@@ -25,14 +25,13 @@ const styles = StyleSheet.create({
     height: 32,
     resizeMode: "contain",
     borderRadius: 100,
-    flexDirection: "row",
+    marginTop: 15,
   },
   searchInput: {
     width: "90%",
   },
   container: {
     flex: 1,
-    alignItems: "center",
     flexDirection: "row",
     marginHorizontal: 20,
   },

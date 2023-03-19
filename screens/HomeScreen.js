@@ -1,11 +1,14 @@
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Header } from "../components/home/Header";
+import { Layout } from "../components/layout/Layout";
+import { Navbar } from "../components/navigation/Navbar";
 
 export const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <Layout>
+        <Navbar />
+      </Layout>
     </SafeAreaView>
   );
 };
@@ -13,5 +16,7 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "flex-start",
+    flexDirection: "row",
   },
 });

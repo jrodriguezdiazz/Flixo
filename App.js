@@ -1,5 +1,10 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { HomeScreen } from "./screens/HomeScreen";
 
 export default function App() {
-  return <HomeScreen />;
+  return (
+    <NavigationContainer>
+      <HomeScreen />
+    </NavigationContainer>
+  );
 }
