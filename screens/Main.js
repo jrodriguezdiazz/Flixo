@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Layout } from "../components/layout/Layout";
 import { Navbar } from "../components/navigation/Navbar";
 
-export const HomeScreen = () => {
+export const Main = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Layout>

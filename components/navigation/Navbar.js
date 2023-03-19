@@ -1,38 +1,9 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function PostScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Post!</Text>
-    </View>
-  );
-}
-
-function NotificationScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Notification!</Text>
-    </View>
-  );
-}
-
-function MessagingScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>MessagingScreen!</Text>
-    </View>
-  );
-}
+import { HomeScreen } from "../../screens/Home";
+import { MessagingScreen } from "../../screens/Messaging";
+import { NotificationScreen } from "../../screens/Notification";
+import { PostScreen } from "../../screens/Post";
 
 const Tab = createMaterialTopTabNavigator();
 export const Navbar = () => {
