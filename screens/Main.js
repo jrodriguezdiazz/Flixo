@@ -1,14 +1,18 @@
 import { StyleSheet } from "react-native";
+import { Divider } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Layout } from "../components/layout/Layout";
+import { Header } from "../components/home/Header";
 import { Navbar } from "../components/navigation/Navbar";
 
 export const Main = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Layout>
-        <Navbar />
-      </Layout>
+      <Header />
+      <Divider
+        width={1}
+        orientation={"vertical"}
+      />
+      <Navbar />
     </SafeAreaView>
   );
 };
@@ -16,7 +20,5 @@ export const Main = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "flex-start",
-    flexDirection: "row",
   },
 });
