@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { Divider } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Header } from "../components/home/Header";
+import { Header } from "../components/navigation/Header";
 import { Navbar } from "../components/navigation/Navbar";
 
 export const Main = () => {

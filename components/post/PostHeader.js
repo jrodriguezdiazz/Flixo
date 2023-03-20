@@ -1,7 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export const PostHeader = ({ post }) => {
-  console.log(post);
   return (
     <View style={styles.container}>
       <View style={styles.containerUser}>
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    margin: 5,
+    marginVertical: 10,
     alignItems: "center",
   },
   containerUser: {
@@ -32,16 +31,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   profileImage: {
-    width: 32,
-    height: 32,
+    width: 35,
+    height: 35,
     borderRadius: 50,
     borderColor: "#e4c220",
   },
   username: {
-    marginLeft: 5,
-    // fontWeight: 700,
+    marginLeft: 15,
+    fontWeight: "700",
   },
   options: {
     fontWeight: "900",
+    marginRight: 15,
   },
 });
