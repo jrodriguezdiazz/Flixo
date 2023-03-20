@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { Divider } from "react-native-elements";
 
-export const PhotoScreen = () => {
+export const NewPostScreen = () => {
   return (
     <View style={styles.container}>
       <Divider

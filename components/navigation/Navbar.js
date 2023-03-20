@@ -3,8 +3,8 @@ import { StyleSheet, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { HomeScreen } from "../../screens/Home";
 import { MessagingScreen } from "../../screens/Messaging";
+import { NewPostScreen } from "../../screens/NewPostScreen";
 import { NotificationScreen } from "../../screens/Notification";
-import { PhotoScreen } from "../../screens/Photo";
 
 const Tab = createMaterialTopTabNavigator();
 export const Navbar = () => {
@@ -18,7 +18,7 @@ export const Navbar = () => {
 
             if (route.name === "Home") {
               iconName = focused ? "home" : "home-outline";
-            } else if (route.name === "Post") {
+            } else if (route.name === "New Post") {
               iconName = focused ? "camera" : "camera-outline";
             } else if (route.name === "Notification") {
               iconName = focused ? "notifications" : "notifications-outline";
@@ -46,9 +46,9 @@ export const Navbar = () => {
           options={{ tabBarLabel: "Home" }}
         />
         <Tab.Screen
-          name="Post"
-          component={PhotoScreen}
-          options={{ tabBarLabel: "Post" }}
+          name="New Post"
+          component={NewPostScreen}
+          options={{ tabBarLabel: "New Post" }}
         />
         <Tab.Screen
           name="Notification"
