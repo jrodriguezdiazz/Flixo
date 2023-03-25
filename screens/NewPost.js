@@ -1,13 +1,10 @@
 import { StyleSheet, View } from "react-native";
-import { Divider } from "react-native-elements";
+import { AddNewPost } from "../components/newPost/AddNewPost";
 
-export const NewPostScreen = () => {
+export const NewPost = () => {
   return (
     <View style={styles.container}>
-      <Divider
-        width={1}
-        orientation={"vertical"}
-      />
+      <AddNewPost />
     </View>
   );
 };
