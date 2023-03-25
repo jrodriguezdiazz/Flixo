@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { HomeScreen } from "../../screens/Home";
 import { MessagingScreen } from "../../screens/Messaging";
-import { NewPostScreen } from "../../screens/NewPostScreen";
+import { NewPost } from "../../screens/NewPost";
 import { NotificationScreen } from "../../screens/Notification";
 
 const Tab = createMaterialTopTabNavigator();
@@ -47,7 +47,7 @@ export const Navbar = () => {
         />
         <Tab.Screen
           name="New Post"
-          component={NewPostScreen}
+          component={NewPost}
           options={{ tabBarLabel: "New Post" }}
         />
         <Tab.Screen

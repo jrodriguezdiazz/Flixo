@@ -1,10 +1,5 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { Main } from "./screens/Main";
+import { Navigation } from "./components/navigation/Navigation";
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Main />
-    </NavigationContainer>
-  );
+  return <Navigation />;
 }
