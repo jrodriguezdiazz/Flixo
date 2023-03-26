@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Image, StyleSheet, Text, TextInput, View } from "react-native";
 import validUrl from "valid-url";
 import { uploadPostSchema } from "../../schema/newPost";
-import { DEFAULT_IMAGE } from "../utils/constant";
+import { DEFAULT_IMAGE } from "../../utils/constant";
 
 export const FormikPostUploader = () => {
   const [thumbnail, setThumbnail] = useState(DEFAULT_IMAGE);

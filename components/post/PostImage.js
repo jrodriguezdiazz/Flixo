@@ -1,5 +1,5 @@
 import { Image, StyleSheet, View } from "react-native";
-import { DEFAULT_IMAGE } from "../utils/constant";
+import { DEFAULT_IMAGE } from "../../utils/constant";
 
 export const PostImage = ({ post }) => {
   return (
