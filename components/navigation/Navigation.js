@@ -1,9 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Login } from "../../screens/Login";
-import { Main } from "../../screens/Main";
-import { SingUp } from "../../screens/SingUp";
-import { SingUpSecondPart } from "../../screens/SingUpSecondPart";
+import { SCREEN_MAP } from "../../utils/constant";
 
 const Stack = createStackNavigator();
 const screenOptions = {
@@ -13,25 +10,19 @@ export const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={"LoginScreen"}
+        initialRouteName={SCREEN_MAP.defaultScreen}
         screenOptions={screenOptions}
       >
-        <Stack.Screen
-          name={"HomeScreen"}
-          component={Main}
-        />
-        <Stack.Screen
-          name={"LoginScreen"}
-          component={Login}
-        />
-        <Stack.Screen
-          name={"SingUpScreen"}
-          component={SingUp}
-        />
-        <Stack.Screen
-          name={"SingUpSecondPart"}
-          component={SingUpSecondPart}
-        />
+        {SCREEN_MAP.screens.map(({ name, component }) => {
+          return (
+            <Stack.Screen
+              navigationKey={name}
+              key={name}
+              name={name}
+              component={component}
+            />
+          );
+        })}
       </Stack.Navigator>
     </NavigationContainer>
   );
