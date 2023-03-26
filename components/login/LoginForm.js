@@ -35,7 +35,7 @@ export const LoginForm = ({ navigation }) => {
       <Pressable
         titleSize={20}
         style={styles.button}
-        onPress={() => navigation.push("SingUpScreen")}
+        onPress={() => navigation.push("HomeScreen")}
       >
         <Text style={styles.buttonText}>Log In</Text>
       </Pressable>
