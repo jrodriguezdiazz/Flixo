@@ -1,5 +1,5 @@
-import { SignUpForm } from "components/signUp/SignUpForm";
 import { Image, StyleSheet, View } from "react-native";
+import { SignUpForm } from "../components/signUp/SignUpForm";
 
 export const SignUp = ({ navigation }) => {
   return (
