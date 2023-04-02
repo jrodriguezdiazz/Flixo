@@ -1,5 +1,5 @@
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import { TextInput } from "../../utils/TextInput";
+import { TextInput } from "../commons/TextInput";
 
 export const Header = () => {
   return (
