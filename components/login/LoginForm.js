@@ -2,33 +2,29 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import { Divider } from "react-native-elements";
+import { TextInput } from "../commons/TextInput";
 
 export const LoginForm = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder={"Username"}
-          autoCapitalize={"none"}
-          keyboardType={"email-address"}
-          textContent={"emailAddress"}
-          autoFocus={true}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder={"Password"}
-          autoCapitalize={"none"}
-          autoCorrect={false}
-          secureTextEntry={true}
-          textContentType={"password"}
-        />
-      </View>
+      <TextInput
+        label={"Username"}
+        autoCapitalize={"none"}
+        keyboardType={"email-address"}
+        textContent={"emailAddress"}
+        autoFocus={true}
+      />
+      <TextInput
+        label={"Password"}
+        autoCapitalize={"none"}
+        autoCorrect={false}
+        secureTextEntry={true}
+        textContentType={"password"}
+      />
       <View style={styles.forgotPasswordContainer}>
         <Text style={styles.forgotPassword}>Forgot password?</Text>
       </View>
