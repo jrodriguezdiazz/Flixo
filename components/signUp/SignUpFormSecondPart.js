@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
-export const SingUpFormSecondPart = () => {
+export const SignUpFormSecondPart = () => {
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>

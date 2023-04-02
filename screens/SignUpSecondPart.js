@@ -1,7 +1,7 @@
 import { Image, StyleSheet, View } from "react-native";
-import { SingUpForm } from "../components/singUp/SingUpForm";
+import { SignUpFormSecondPart } from "../components/signUp/SignUpFormSecondPart";
 
-export const SingUp = ({ navigation }) => {
+export const SignUpSecondPart = () => {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -10,7 +10,7 @@ export const SingUp = ({ navigation }) => {
           source={require("../assets/Flixo-Logo.png")}
         />
       </View>
-      <SingUpForm navigation={navigation} />
+      <SignUpFormSecondPart />
     </View>
   );
 };

@@ -1,6 +1,6 @@
 import { Login } from "../screens/Login";
 import { Main } from "../screens/Main";
-import { SingUp } from "../screens/SingUp";
+import { SignUp } from "../screens/SignUp";
 
 export const DEFAULT_IMAGE = "https://placehold.co/600x600/png";
 export const SCREEN_MAP = {
@@ -16,7 +16,7 @@ export const SCREEN_MAP = {
     },
     {
       name: "SingUpScreen",
-      component: SingUp,
+      component: SignUp,
     },
   ],
 };

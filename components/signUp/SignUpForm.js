@@ -3,7 +3,7 @@ import { Calendar } from "../commons/Calendar";
 import { TextInput } from "../commons/TextInput";
 import { TextInputPhoneNumber } from "../commons/TextInputPhoneNumber";
 
-export const SingUpForm = ({ navigation }) => {
+export const SignUpForm = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
