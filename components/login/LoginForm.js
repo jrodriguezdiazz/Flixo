@@ -13,7 +13,7 @@ export const LoginForm = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder={"Phone number, username or email"}
+          placeholder={"Username"}
           autoCapitalize={"none"}
           keyboardType={"email-address"}
           textContent={"emailAddress"}
@@ -30,7 +30,7 @@ export const LoginForm = ({ navigation }) => {
         />
       </View>
       <View style={styles.forgotPasswordContainer}>
-        <Text>Forgot password?</Text>
+        <Text style={styles.forgotPassword}>Forgot password?</Text>
       </View>
       <Pressable
         titleSize={20}
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
   },
   forgotPasswordContainer: {
     alignItems: "flex-start",
-    marginVertical: 30,
+    marginTop: 10,
+    marginBottom: 30,
     color: "#f5d40f",
   },
   containerSingup: {
@@ -88,6 +89,9 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
   singUp: {
+    color: "#f5d40f",
+  },
+  forgotPassword: {
     color: "#f5d40f",
   },
 });
