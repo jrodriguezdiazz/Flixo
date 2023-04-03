@@ -1,10 +1,10 @@
 import { LayoutForm } from "../components/commons/LayoutForm";
-import { NewPasswordFrom } from "../components/new-password/NewPasswordFrom";
+import { NewPasswordForm } from "../components/password/NewPasswordFrom";
 
 export const NewPassword = ({ navigation }) => {
   return (
     <LayoutForm>
-      <NewPasswordFrom navigation={navigation} />
+      <NewPasswordForm navigation={navigation} />
     </LayoutForm>
   );
 };

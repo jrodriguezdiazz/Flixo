@@ -36,3 +36,4 @@ export const SCREEN_MAP = {
   ],
 };
 export const MINIMUM_REGISTRATION_AGE = 13;
+export const VERIFICATION_CELL_COUNT = 6;

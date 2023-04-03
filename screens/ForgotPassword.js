@@ -1,5 +1,5 @@
 import { LayoutForm } from "../components/commons/LayoutForm";
-import { ForgotPasswordForm } from "../components/forgot-password-form/ForgotPasswordForm";
+import { ForgotPasswordForm } from "../components/password/ForgotPasswordForm";
 
 export const ForgotPassword = ({ navigation }) => {
   return (
