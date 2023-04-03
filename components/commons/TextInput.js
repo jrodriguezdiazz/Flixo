@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { TextInput as MDTextInput } from "react-native-paper";
+import { TextInput as RNPTextInput } from "react-native-paper";
 
 export const TextInput = ({ ...props }) => {
   const [input, setInput] = useState("");
 
   return (
     <View style={styles.container}>
-      <MDTextInput
+      <RNPTextInput
         value={input}
         onChangeText={(value) => setInput(value)}
         theme={{ roundness: 4 }}
