@@ -6,6 +6,8 @@ import {
   View,
 } from "react-native";
 import { Divider } from "react-native-elements";
+import { TextInput as RNPTextInput } from "react-native-paper";
+import { Button } from "../commons/Button";
 import { TextInput } from "../commons/TextInput";
 
 export const LoginForm = ({ navigation }) => {
