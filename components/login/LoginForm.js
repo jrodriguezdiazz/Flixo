@@ -26,7 +26,9 @@ export const LoginForm = ({ navigation }) => {
         textContentType={"password"}
       />
       <View style={styles.forgotPasswordContainer}>
-        <Text style={styles.forgotPassword}>Forgot password?</Text>
+        <Pressable onPress={() => navigation.push("ForgotPasswordScreen")}>
+          <Text style={styles.forgotPassword}>Forgot password?</Text>
+        </Pressable>
       </View>
       <Pressable
         titleSize={20}

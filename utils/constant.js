@@ -1,3 +1,4 @@
+import { ForgotPassword } from "../screens/ForgotPassword";
 import { Login } from "../screens/Login";
 import { Main } from "../screens/Main";
 import { SignUp } from "../screens/SignUp";
@@ -17,6 +18,10 @@ export const SCREEN_MAP = {
     {
       name: "SingUpScreen",
       component: SignUp,
+    },
+    {
+      name: "ForgotPasswordScreen",
+      component: ForgotPassword,
     },
   ],
 };
