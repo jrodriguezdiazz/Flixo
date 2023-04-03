@@ -1,4 +1,6 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { TextInput as RNPTextInput } from "react-native-paper";
+import { Button } from "../commons/Button";
 import { Calendar } from "../commons/Calendar";
 import { TextInput } from "../commons/TextInput";
 import { TextInputPhoneNumber } from "../commons/TextInputPhoneNumber";
@@ -15,10 +17,11 @@ export const SignUpForm = ({ navigation }) => {
           <TextInput
             label="Password"
             secureTextEntry={true}
+            right={<RNPTextInput.Icon icon="eye" />}
           />
           <TextInput label="First Name" />
           <TextInput label="Last Name" />
-          <View></View>
+          <TextInput label="Email" />
           <TextInputPhoneNumber label="Pone Number" />
           <Calendar style={styles.calendar} />
         </View>
@@ -29,13 +32,11 @@ export const SignUpForm = ({ navigation }) => {
             send a verification code via SMS.
           </Text>
         </View>
-        <Pressable
-          titleSize={20}
-          style={styles.button}
-          onPress={() => navigation.push("HomeScreen")}
-        >
-          <Text style={styles.buttonText}>Agree & Join</Text>
-        </Pressable>
+        <Button
+          label={"Agree & Join"}
+          icon={"login"}
+          action={() => navigation.push("HomeScreen")}
+        />
       </View>
     </ScrollView>
   );
