@@ -1,33 +1,10 @@
-import { Image, StyleSheet, View } from "react-native";
-import { SignUpFormSecondPart } from "../components/signUp/SignUpFormSecondPart";
+import { LayoutForm } from "../components/commons/LayoutForm";
+import { SignUpFormSecondPart } from "../components/sign-up/SignUpFormSecondPart";
 
 export const SignUpSecondPart = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image
-          style={styles.logo}
-          source={require("../assets/Flixo-Logo.png")}
-        />
-      </View>
+    <LayoutForm>
       <SignUpFormSecondPart />
-    </View>
+    </LayoutForm>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 50,
-    paddingHorizontal: 12,
-  },
-  logoContainer: {
-    alignItems: "center",
-    marginTop: 60,
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 60,
-  },
-});

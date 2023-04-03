@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { AddNewPost } from "../components/newPost/AddNewPost";
+import { AddNewPost } from "../components/new-post/AddNewPost";
 
 export const NewPost = () => {
   return (
