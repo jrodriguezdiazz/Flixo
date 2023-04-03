@@ -24,19 +24,18 @@ export const LoginForm = ({ navigation }) => {
         autoCorrect={false}
         secureTextEntry={true}
         textContentType={"password"}
+        right={<RNPTextInput.Icon icon="eye" />}
       />
       <View style={styles.forgotPasswordContainer}>
         <Pressable onPress={() => navigation.push("ForgotPasswordScreen")}>
           <Text style={styles.forgotPassword}>Forgot password?</Text>
         </Pressable>
       </View>
-      <Pressable
-        titleSize={20}
-        style={styles.button}
-        onPress={() => navigation.push("HomeScreen")}
-      >
-        <Text style={styles.buttonText}>Log In</Text>
-      </Pressable>
+      <Button
+        label={"Log In"}
+        icon={"login"}
+        action={() => navigation.push("VerificationScreen")}
+      />
       <Divider
         width={1}
         orientation={"vertical"}
