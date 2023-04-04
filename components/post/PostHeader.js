@@ -1,15 +1,11 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { ProfilePicture } from "../commons/ProfilePicture";
 
 export const PostHeader = ({ post }) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerUser}>
-        <TouchableOpacity>
-          <Image
-            source={{ uri: post.profileImage }}
-            style={styles.profileImage}
-          />
-        </TouchableOpacity>
+        <ProfilePicture uri={post.profileImage} />
         <Text style={styles.username}>{post.username}</Text>
       </View>
       <Text style={styles.options}>...</Text>
@@ -29,12 +25,6 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     flexDirection: "row",
     alignItems: "center",
-  },
-  profileImage: {
-    width: 35,
-    height: 35,
-    borderRadius: 50,
-    borderColor: "#e4c220",
   },
   username: {
     marginLeft: 15,
