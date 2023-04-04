@@ -2,7 +2,7 @@ export const POSTS = [
   {
     id: 1,
     username: "astain0",
-    profileImage:
+    profilePicture:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
     imageURL:
       "https://images.unsplash.com/photo-1678899241942-13f17c611d83?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
@@ -31,7 +31,7 @@ export const POSTS = [
   {
     id: 2,
     username: "scanner1",
-    profileImage:
+    profilePicture:
       "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     imageURL:
       "https://images.unsplash.com/photo-1679243866666-9adb515672c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80",
@@ -55,7 +55,7 @@ export const POSTS = [
   {
     id: 3,
     username: "aormston2",
-    profileImage:
+    profilePicture:
       "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     imageURL:
       "https://images.unsplash.com/photo-1678880032265-d768532b7454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",

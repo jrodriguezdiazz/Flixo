@@ -5,7 +5,7 @@ export const PostHeader = ({ post }) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerUser}>
-        <ProfilePicture uri={post.profileImage} />
+        <ProfilePicture uri={post.profilePicture} />
         <Text style={styles.username}>{post.username}</Text>
       </View>
       <Text style={styles.options}>...</Text>
