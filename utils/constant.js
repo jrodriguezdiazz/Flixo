@@ -7,7 +7,7 @@ import { Verification } from "../screens/Verification";
 
 export const DEFAULT_IMAGE = "https://placehold.co/600x600/png";
 export const SCREEN_MAP = {
-  defaultScreen: "LoginScreen",
+  defaultScreen: "HomeScreen",
   screens: [
     {
       name: "HomeScreen",
@@ -37,3 +37,4 @@ export const SCREEN_MAP = {
 };
 export const MINIMUM_REGISTRATION_AGE = 13;
 export const VERIFICATION_CELL_COUNT = 6;
+export const MAXIMUM_NUMBER_OF_CHARACTERS_FOR_MESSAGE = 40;

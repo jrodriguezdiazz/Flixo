@@ -2,7 +2,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { TextInput as RNPTextInput } from "react-native-paper";
-import { getMinimumRegistrationAge } from "../../utils/getAviabledateToRegister";
+import { getMinimumRegistrationAge } from "../../utils";
 
 export const Calendar = () => {
   const minimumRegistrationAge = getMinimumRegistrationAge();

@@ -4,7 +4,7 @@ export const NOTIFICATIONS = [
   {
     id: "1",
     user: "karennne",
-    message: "karennne liked your post.",
+    header: "karennne liked your post.",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
     date: "2023-04-03 10:00 AM",
@@ -12,7 +12,7 @@ export const NOTIFICATIONS = [
   {
     id: "2",
     user: "karennne",
-    message: "karennne liked martini_rond’s comment: @martini_rond Nice!",
+    header: "karennne liked martini_rond’s comment: @martini_rond Nice!",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
     date: "2023-04-03 05:00 PM",
@@ -20,7 +20,7 @@ export const NOTIFICATIONS = [
   {
     id: "3",
     user: "johndoe",
-    message: "johndoe started follow you.",
+    header: "johndoe started follow you.",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
     date: "2023-04-01 10:00 AM",
@@ -28,7 +28,7 @@ export const NOTIFICATIONS = [
   {
     id: "4",
     user: "zackjohn",
-    message: "zackjohn liked mis_potter’s post.",
+    header: "zackjohn liked mis_potter’s post.",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
     date: "2023-01-03 10:00 AM",
@@ -36,7 +36,7 @@ export const NOTIFICATIONS = [
   {
     id: "5",
     user: "darrell_trivedi",
-    message: "darrell_trivedi liked your post.",
+    header: "darrell_trivedi liked your post.",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
     date: "2023-04-03 10:00 AM",
@@ -44,7 +44,7 @@ export const NOTIFICATIONS = [
   {
     id: "5",
     user: "darrell_trivedi",
-    message: "darrell_trivedi liked your post.",
+    header: "darrell_trivedi liked your post.",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
     date: "2023-04-03 10:00 AM",
@@ -52,7 +52,7 @@ export const NOTIFICATIONS = [
   {
     id: "6",
     user: "darrell_trivedi",
-    message: "darrell_trivedi liked your post.",
+    header: "darrell_trivedi liked your post.",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
     date: "2023-04-03 10:00 AM",
@@ -60,7 +60,7 @@ export const NOTIFICATIONS = [
   {
     id: "7",
     user: "darrell_trivedi",
-    message: "darrell_trivedi liked your post.",
+    header: "darrell_trivedi liked your post.",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
     date: "2023-04-03 10:00 AM",
@@ -68,7 +68,7 @@ export const NOTIFICATIONS = [
   {
     id: "8",
     user: "darrell_trivedi",
-    message: "darrell_trivedi liked your post.",
+    header: "darrell_trivedi liked your post.",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
     date: "2023-04-03 10:00 AM",
@@ -76,7 +76,7 @@ export const NOTIFICATIONS = [
   {
     id: "9",
     user: "darrell_trivedi",
-    message: "darrell_trivedi liked your post.",
+    header: "darrell_trivedi liked your post.",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
     date: "2023-04-03 10:00 AM",

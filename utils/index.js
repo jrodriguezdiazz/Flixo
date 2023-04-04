@@ -1,3 +1,8 @@
+import {
+  MAXIMUM_NUMBER_OF_CHARACTERS_FOR_MESSAGE,
+  MINIMUM_REGISTRATION_AGE,
+} from "./constant";
+
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
   const now = new Date();
@@ -20,4 +25,16 @@ export const formatDate = (dateString) => {
   } else {
     return `${diffWeeks}w`;
   }
+};
+
+export const getMinimumRegistrationAge = () => {
+  const date = new Date();
+  date.setFullYear(date.getFullYear() - MINIMUM_REGISTRATION_AGE);
+  return date;
+};
+
+export const truncateString = (message) => {
+  return message.length > MAXIMUM_NUMBER_OF_CHARACTERS_FOR_MESSAGE
+    ? `${message.slice(0, MAXIMUM_NUMBER_OF_CHARACTERS_FOR_MESSAGE)}...`
+    : message;
 };
