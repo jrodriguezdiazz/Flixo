@@ -38,3 +38,12 @@ export const SCREEN_MAP = {
 export const MINIMUM_REGISTRATION_AGE = 13;
 export const VERIFICATION_CELL_COUNT = 6;
 export const MAXIMUM_NUMBER_OF_CHARACTERS_FOR_MESSAGE = 40;
+
+export const POST_ACTIONS = [
+  { iconName: "md-chatbubbles-outline", name: "commnet" },
+  {
+    iconName: "md-bonfire-outline",
+    name: "Fire",
+  },
+  { iconName: "send-outline", name: "Send" },
+];

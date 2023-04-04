@@ -1,33 +1,44 @@
-import { StyleSheet, View } from "react-native";
-import { PostCaption } from "./PostCaption";
-import { PostComment, PostSection } from "./PostComment";
+import { StyleSheet } from "react-native";
+import { Card, Text } from "react-native-paper";
+import { DEFAULT_IMAGE } from "../../utils/constant";
+import { ProfilePicture } from "../commons/ProfilePicture";
+import { PostSection } from "./PostComment";
 import { PostFooter } from "./PostFooter";
-import { PostHeader } from "./PostHeader";
-import { PostImage } from "./PostImage";
 import { PostReaction } from "./PostReaction";
 
 export const Post = ({ post }) => {
   return (
-    <View style={styles.container}>
-      <PostHeader post={post} />
-      <PostCaption post={post} />
-      <PostImage post={post} />
-      <View style={styles.postFooter}>
-        <PostFooter post={post} />
+    <Card style={styles.container}>
+      <Card.Title
+        title={post.username}
+        subtitle={post.bio}
+        left={() => <ProfilePicture uri={post.profilePicture} />}
+      />
+      <Card.Content>
+        <Text variant="bodyMedium">{post.caption}</Text>
+        <Text variant="bodyMedium">{post.date}</Text>
+      </Card.Content>
+      <Card.Cover
+        style={styles.imagePost}
+        source={{ uri: post.imageURL || DEFAULT_IMAGE }}
+      />
+      <Card.Content>
         <PostReaction post={post} />
-        <PostComment post={post} />
         <PostSection post={post} />
-      </View>
-    </View>
+      </Card.Content>
+      <Card.Actions>
+        <PostFooter />
+      </Card.Actions>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
+    margin: 20,
   },
-  postFooter: {
-    marginHorizontal: 15,
-    marginTop: 10,
+  imagePost: {
+    width: "100%",
+    height: 450,
   },
 });

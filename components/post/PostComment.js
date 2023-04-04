@@ -16,9 +16,9 @@ export const PostSection = ({ post }) => {
   return (
     <View style={styles.container}>
       {numberOfComments && (
-        <Text style={styles.commentSection}>
+        <Text>
           View {numberOfComments > 1 ? "all" : ""} {numberOfComments}
-          {numberOfComments > 1 ? "comments" : "comment"}
+          {numberOfComments > 1 ? " comments" : " comment"}
         </Text>
       )}
     </View>
@@ -28,11 +28,5 @@ export const PostSection = ({ post }) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 5,
-  },
-  username: {
-    fontWeight: "900",
-  },
-  commentSection: {
-    color: "gray",
   },
 });
