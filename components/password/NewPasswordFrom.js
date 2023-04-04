@@ -25,7 +25,7 @@ export const NewPasswordForm = ({ navigation }) => {
       <Button
         label={"Submit"}
         icon={"send"}
-        action={() => navigation.push("VerificationScreen")}
+        action={() => navigation.push("MainScreen")}
       />
     </View>
   );

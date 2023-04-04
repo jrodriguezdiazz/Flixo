@@ -36,7 +36,7 @@ export const LoginForm = ({ navigation }) => {
       <Button
         label={"Log In"}
         icon={"login"}
-        action={() => navigation.push("VerificationScreen")}
+        action={() => navigation.push("HomeScreen")}
       />
       <Divider
         width={1}
