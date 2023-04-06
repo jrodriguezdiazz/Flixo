@@ -3,24 +3,16 @@ import { formatDate, truncateString } from "../../utils";
 
 export const RowDetails = ({ info }) => {
   return (
-    <View>
-      <View>
-        <Text style={styles.username}>{info.header}</Text>
-      </View>
-      {info.message && (
-        <View>
-          <Text style={styles.username}>{truncateString(info.message)}</Text>
-        </View>
-      )}
-      <View>
-        <Text style={styles.username}>{formatDate(info.date)}</Text>
-      </View>
+    <View style={styles.detail}>
+      <Text>{info.header}</Text>
+      {info.message && <Text>{truncateString(info.message)}</Text>}
+      <Text>{formatDate(info.date)}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  username: {
-    marginLeft: 15,
+  detail: {
+    marginHorizontal: 15,
   },
 });
