@@ -4,10 +4,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Header } from "../components/navigation/Header";
 import { Navbar } from "../components/navigation/Navbar";
 
-export const Main = () => {
+export const Main = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <Header navigation={navigation} />
       <Divider
         width={1}
         orientation={"vertical"}
