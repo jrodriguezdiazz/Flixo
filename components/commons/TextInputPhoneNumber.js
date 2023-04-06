@@ -3,7 +3,9 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
 
 export const TextInputPhoneNumber = () => {
+  // eslint-disable-next-line no-unused-vars
   const [valid, setValid] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [formattedValue, setFormattedValue] = useState("");
   const phoneInput = useRef(null);
   const [value, setValue] = useState("");
