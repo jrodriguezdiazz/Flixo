@@ -1,11 +1,19 @@
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Feed } from "../components/commons/Feed";
-import { POSTS } from "../data/post";
+import { ProfileInfo } from "../components/profile-info/ProfileInfo";
+import { USER_DATA } from "../data/user";
 
-export const Profile = () => {
+export const Profile = ({ navigation }) => {
+  const { posts } = USER_DATA;
   return (
-    <View>
-      <Feed post={POSTS} />
-    </View>
+    <ScrollView>
+      <View>
+        <ProfileInfo navigation={navigation} />
+        <Feed
+          post={posts}
+          isScrollView={false}
+        />
+      </View>
+    </ScrollView>
   );
 };
