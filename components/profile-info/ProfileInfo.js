@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { USER_DATA } from "../../data/user";
 import { ProfilePicture } from "../commons/ProfilePicture";
-import { EditProfileInfo } from "../profile-info/EditProfileInfo";
+import { ButtonEditProfileInfo } from "../profile-info/ButtonEditProfileInfo";
 import { NameAndBio } from "../profile-info/NameAndBio";
 import { Statistics } from "../profile-info/Statistics";
 
@@ -17,7 +17,7 @@ export const ProfileInfo = ({ navigation }) => {
         />
         <NameAndBio />
         <Statistics />
-        {isOwnProfile && <EditProfileInfo navigation={navigation} />}
+        {isOwnProfile && <ButtonEditProfileInfo navigation={navigation} />}
       </View>
     </SafeAreaView>
   );

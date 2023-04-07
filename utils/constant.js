@@ -1,3 +1,4 @@
+import { EditProfile } from "../screens/EditProfile";
 import { ForgotPassword } from "../screens/ForgotPassword";
 import { Login } from "../screens/Login";
 import { Main } from "../screens/Main";
@@ -37,6 +38,10 @@ export const SCREEN_MAP = {
     {
       name: "ProfileScreen",
       component: Profile,
+    },
+    {
+      name: "EditProfileScreen",
+      component: EditProfile,
     },
   ],
 };
