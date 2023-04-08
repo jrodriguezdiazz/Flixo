@@ -1,13 +1,15 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Divider } from "react-native-elements";
 import { Card } from "react-native-paper";
+import { theme } from "../../utils/constant";
 import { ProfilePicture } from "./ProfilePicture";
 import { RowDetails } from "./RowDetails";
 
 export const RowItem = ({ info }) => {
+  const { colors } = theme;
   return (
     <TouchableOpacity>
-      <Card style={styles.cardContainer}>
+      <Card style={styles.cardContainer(colors, info.seen)}>
         <View style={styles.container}>
           <ProfilePicture uri={info.profilePicture} />
           <RowDetails info={info} />
@@ -28,7 +30,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 20,
   },
-  cardContainer: {
+  cardContainer: ({ bone, white }, seen) => ({
     margin: 5,
-  },
+    backgroundColor: seen ? white : bone,
+  }),
 });

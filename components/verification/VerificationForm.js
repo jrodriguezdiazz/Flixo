@@ -6,10 +6,11 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
-import { VERIFICATION_CELL_COUNT } from "../../utils/constant";
+import { theme, VERIFICATION_CELL_COUNT } from "../../utils/constant";
 import { Button } from "../commons/Button";
 
 export const VerificationForm = ({ navigation }) => {
+  const { colors } = theme;
   const [value, setValue] = useState("");
   const ref = useBlurOnFulfill({ value, cellCount: VERIFICATION_CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -32,7 +33,7 @@ export const VerificationForm = ({ navigation }) => {
         renderCell={({ index, symbol, isFocused }) => (
           <TextInput
             key={index}
-            style={[styles.cell, isFocused && styles.focusCell]}
+            style={[styles.cell(colors), isFocused && styles.focusCell(colors)]}
             onLayout={getCellOnLayoutHandler(index)}
           >
             {symbol || (isFocused ? <Cursor /> : null)}
@@ -60,16 +61,16 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 40,
   },
-  cell: {
+  cell: ({ sunflower }) => ({
     width: 35,
     height: 35,
     lineHeight: 30,
     fontSize: 20,
-    borderWidth: 1,
-    borderColor: "#00000030",
+    borderWidth: 0.5,
+    borderColor: sunflower,
     textAlign: "center",
-  },
-  focusCell: {
-    borderColor: "#000000",
-  },
+  }),
+  focusCell: ({ black }) => ({
+    borderColor: black,
+  }),
 });

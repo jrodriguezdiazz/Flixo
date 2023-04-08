@@ -12,7 +12,7 @@ export const ProfileInfo = ({ navigation }) => {
     <SafeAreaView>
       <View style={styles.container}>
         <ProfilePicture
-          size={80}
+          size={100}
           uri={profilePicture}
         />
         <NameAndBio />
@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     alignContent: "stretch",
-    marginVertical: 20,
+    marginTop: 50,
   },
 });

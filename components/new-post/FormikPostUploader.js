@@ -1,11 +1,14 @@
 import { Formik } from "formik";
 import { useState } from "react";
-import { Button, Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import validUrl from "valid-url";
+
 import { uploadPostSchema } from "../../schema/newPost";
-import { DEFAULT_IMAGE } from "../../utils/constant";
+import { DEFAULT_IMAGE, theme } from "../../utils/constant";
+import { Button } from "../commons/Button";
 
 export const FormikPostUploader = () => {
+  const { colors } = theme;
   const [thumbnail, setThumbnail] = useState(DEFAULT_IMAGE);
   return (
     <Formik
@@ -44,7 +47,9 @@ export const FormikPostUploader = () => {
                 value={values.imageURL}
               />
               {errors.imageURL && (
-                <Text style={styles.errorMessage}>{errors.imageURL}</Text>
+                <Text style={styles.errorMessage(colors)}>
+                  {errors.imageURL}
+                </Text>
               )}
             </View>
             <Image
@@ -54,10 +59,10 @@ export const FormikPostUploader = () => {
               }}
             />
             <Button
-              onPress={handleSubmit}
-              title={"Share"}
+              action={handleSubmit}
+              label={"Share"}
+              icon={"camera"}
               disabled={isValid}
-              style={styles.button}
             />
           </View>
         </>
@@ -67,11 +72,7 @@ export const FormikPostUploader = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // margin: 20,
-    // justifyContent: "space-between",
-    // flexDirection: "row",
-  },
+  container: {},
   image: {
     width: 200,
     height: 330,
@@ -80,20 +81,11 @@ const styles = StyleSheet.create({
   captionInput: {
     fontSize: 15,
   },
-  captionContainer: {
-    flex: 1,
-    marginLeft: 12,
-  },
   imageURLInput: {
     fontSize: 15,
   },
-  errorMessage: {
+  errorMessage: ({ error }) => ({
     fontSize: 10,
-    color: "red",
-  },
-  button: {
-    marginHorizontal: 20,
-    marginTop: 20,
-    backgroundColor: "#F5D40F",
-  },
+    color: error,
+  }),
 });

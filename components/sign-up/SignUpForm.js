@@ -47,18 +47,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     marginBottom: 20,
   },
-  button: {
-    backgroundColor: "#f5d40f",
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: 42,
-    borderRadius: 5,
-  },
-  buttonText: {
-    fontWeight: "600",
-    color: "#ffffff",
-    fontSize: 20,
-  },
   disclaimer: {
     alignItems: "flex-start",
     marginVertical: 30,

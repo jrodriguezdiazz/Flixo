@@ -1,18 +1,24 @@
 import { StyleSheet, Text, View } from "react-native";
-import { formatDate, truncateString } from "../../utils";
+import { getRelativeTime, truncateString } from "../../utils";
+import { theme } from "../../utils/constant";
 
 export const RowDetails = ({ info }) => {
+  const { colors } = theme;
   return (
     <View style={styles.detail}>
       <Text>{info.header}</Text>
       {info.message && <Text>{truncateString(info.message)}</Text>}
-      <Text>{formatDate(info.date)}</Text>
+      <Text style={styles.date(colors)}>{getRelativeTime(info.date)}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   detail: {
-    marginHorizontal: 15,
+    marginHorizontal: 20,
   },
+  date: ({ payneGrey }) => ({
+    fontStyle: "italic",
+    color: payneGrey,
+  }),
 });

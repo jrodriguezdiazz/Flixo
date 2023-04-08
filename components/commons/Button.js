@@ -1,13 +1,16 @@
 import { StyleSheet } from "react-native";
 import { Button as RNPButton } from "react-native-paper";
+import { theme } from "../../utils/constant";
 
 export const Button = ({ icon, action = null, label }) => {
+  const { colors } = theme;
   return (
     <RNPButton
       icon={icon}
       mode="contained"
       onPress={action}
-      style={styles.button}
+      style={styles.button(colors)}
+      labelStyle={styles.label(colors)}
     >
       {label}
     </RNPButton>
@@ -15,7 +18,10 @@ export const Button = ({ icon, action = null, label }) => {
 };
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#f5d40f",
-  },
+  button: ({ sunflower }) => ({
+    backgroundColor: sunflower,
+  }),
+  label: ({ white }) => ({
+    color: white,
+  }),
 });
