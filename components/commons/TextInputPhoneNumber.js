@@ -1,38 +1,32 @@
-import { useRef, useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { useFormikContext } from "formik";
+import { useRef } from "react";
+import { StyleSheet, View } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
+import { ErrorMessage } from "../commons/ErrorMessage";
 
-export const TextInputPhoneNumber = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [valid, setValid] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [formattedValue, setFormattedValue] = useState("");
+export const TextInputPhoneNumber = ({
+  errorMessage,
+  value,
+  name,
+  ...props
+}) => {
+  const formikProps = useFormikContext();
   const phoneInput = useRef(null);
-  const [value, setValue] = useState("");
 
   return (
     <View style={styles.container}>
       <PhoneInput
+        mode={"outlined"}
         ref={phoneInput}
         defaultValue={value}
         defaultCode="DO"
         layout="first"
-        onChangeText={(text) => {
-          setValue(text);
+        onChangeFormattedText={(phoneNumber) => {
+          formikProps.setFieldValue(name, phoneNumber);
         }}
-        onChangeFormattedText={(text) => {
-          setFormattedValue(text);
-        }}
-        withDarkTheme
-        withShadow
+        {...props}
       />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          const checkValid = phoneInput.current?.isValidNumber(value);
-          setValid(checkValid ? checkValid : false);
-        }}
-      ></TouchableOpacity>
+      {errorMessage && <ErrorMessage message={errorMessage} />}
     </View>
   );
 };

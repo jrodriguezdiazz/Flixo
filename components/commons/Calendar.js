@@ -1,25 +1,24 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { useFormikContext } from "formik";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { TextInput as RNPTextInput } from "react-native-paper";
-import { getMinimumRegistrationAge } from "../../utils";
 import { theme } from "../../utils/constant";
+import { ErrorMessage } from "../commons/ErrorMessage";
 
-export const Calendar = () => {
-  const minimumRegistrationAge = getMinimumRegistrationAge();
-  const [startDate, setStartDate] = useState(minimumRegistrationAge);
+export const Calendar = ({ errorMessage, value, name, ...props }) => {
+  const formikProps = useFormikContext();
+
   const [showStartDate, setShowStartDate] = useState(false);
   const onChangeStartDate = (event, selectedDate) => {
     setShowStartDate(false);
-    setStartDate(selectedDate);
+    formikProps.setFieldValue(name, selectedDate);
   };
   const { colors } = theme;
-
   return (
     <View style={styles.container}>
       <RNPTextInput
         label="Birthday"
-        value={startDate.toUTCString().slice(0, 16)}
         mode={"outlined"}
         theme={styles.inputTheme(colors)}
         outlineColor={"transparent"}
@@ -29,16 +28,19 @@ export const Calendar = () => {
             onPress={() => setShowStartDate(true)}
           />
         }
+        {...props}
+        value={value.toUTCString().slice(0, 16)}
       />
       {showStartDate && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={startDate}
+          value={value}
           mode="date"
           is24Hour={true}
           onChange={onChangeStartDate}
         />
       )}
+      {errorMessage && <ErrorMessage message={errorMessage} />}
     </View>
   );
 };
