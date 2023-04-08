@@ -74,6 +74,7 @@ export const theme = {
     alabaster: "#eee6da",
     error: "#ff2929ff",
     back: "#000000",
-    payneGrey: "#3C3C43",
+    payneGrey: "#3c3c43",
   },
 };
+export const PHONE_REGEX = /^\+1(809|829|849)\d{7}$/;
