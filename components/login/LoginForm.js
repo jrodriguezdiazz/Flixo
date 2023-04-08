@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 import { Divider } from "react-native-elements";
-import { TextInput as RNPTextInput } from "react-native-paper";
 import { loginSchema } from "../../schema/login";
 import { theme } from "../../utils/constant";
 import { Button } from "../commons/Button";
@@ -44,7 +43,6 @@ export const LoginForm = ({ navigation }) => {
             autoCorrect={false}
             secureTextEntry={true}
             textContentType={"password"}
-            right={<RNPTextInput.Icon icon="eye" />}
             name={"password"}
             onChangeText={handleChange("password")}
             onBlur={handleBlur("password")}
