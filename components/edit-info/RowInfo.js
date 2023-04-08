@@ -7,7 +7,10 @@ export const RowInfo = ({ label }) => {
       <View style={styles.label}>
         <Text>{label}</Text>
       </View>
-      <TextInput style={styles.textInput} />
+      <TextInput
+        isOutlineTransparent={true}
+        style={styles.textInput}
+      />
     </View>
   );
 };
@@ -20,10 +23,10 @@ const styles = StyleSheet.create({
     alignContent: "stretch",
   },
   label: {
-    width: 70,
+    width: 60,
   },
   textInput: {
-    marginLeft: 30,
-    minWidth: "70%",
+    marginLeft: 20,
+    minWidth: "75%",
   },
 });
