@@ -1,17 +1,17 @@
-import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { TextInput as RNPTextInput } from "react-native-paper";
 import { theme } from "../../utils/constant";
 
-export const TextInput = ({ isOutlineTransparent = false, ...props }) => {
-  const [input, setInput] = useState("");
+export const TextInput = ({
+  isOutlineTransparent = false,
+  isValid = true,
+  ...props
+}) => {
   const { colors } = theme;
   return (
     <View style={styles.container}>
       <RNPTextInput
-        value={input}
-        onChangeText={(value) => setInput(value)}
-        theme={styles.inputTheme(colors)}
+        theme={styles.inputTheme(colors, isValid)}
         outlineColor={isOutlineTransparent ? "transparent" : null}
         mode={"outlined"}
         {...props}
@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
   },
-  inputTheme: ({ white, sunflower }) => ({
+  inputTheme: ({ white, sunflower, error }, isValid) => ({
     roundness: 4,
     colors: {
       placeholder: white,
-      primary: sunflower,
+      primary: isValid ? sunflower : error,
       underlineColor: "transparent",
     },
   }),
