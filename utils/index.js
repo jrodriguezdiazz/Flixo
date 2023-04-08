@@ -1,29 +1,29 @@
+import moment from "moment";
 import {
   MAXIMUM_NUMBER_OF_CHARACTERS_FOR_MESSAGE,
   MINIMUM_REGISTRATION_AGE,
 } from "./constant";
 
-export const formatDate = (dateString) => {
+export const formatDate = (dateString, format = "LL") => {
   const date = new Date(dateString);
-  const now = new Date();
+  return moment(date).format(format);
+};
 
-  const diffMs = now - date;
-  const diffSeconds = Math.floor(diffMs / 1000);
-  const diffMinutes = Math.floor(diffMs / (60 * 1000));
-  const diffHours = Math.floor(diffMs / (60 * 60 * 1000));
-  const diffDays = Math.floor(diffMs / (24 * 60 * 60 * 1000));
-  const diffWeeks = Math.floor(diffMs / (7 * 24 * 60 * 60 * 1000));
+export const getRelativeTime = (date) => {
+  const now = moment();
+  const diff = moment(now).diff(date, "minutes");
 
-  if (diffSeconds < 60) {
-    return `${diffSeconds}s`;
-  } else if (diffMinutes < 60) {
-    return `${diffMinutes}m`;
-  } else if (diffHours < 24) {
-    return `${diffHours}h`;
-  } else if (diffDays < 7) {
-    return `${diffDays}d`;
+  if (diff < 60) {
+    return `${diff} minutes ago`;
+  } else if (diff < 1440) {
+    const hours = Math.floor(diff / 60);
+    return `${hours} hours ago`;
+  } else if (diff < 10080) {
+    const days = Math.floor(diff / 1440);
+    return `${days} days ago`;
   } else {
-    return `${diffWeeks}w`;
+    const weeks = Math.floor(diff / 10080);
+    return `${weeks} weeks ago`;
   }
 };
 
