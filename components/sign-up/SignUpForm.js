@@ -1,13 +1,27 @@
 import { Formik } from "formik";
 import { StyleSheet, Text, View } from "react-native";
 import { signUpSchema } from "../../schema/signUp";
+import { useAuthStore } from "../../stores/useAuthStore";
 import { getMinimumRegistrationAge } from "../../utils";
 import { Button } from "../commons/Button";
 import { Calendar } from "../commons/Calendar";
+import { Loading } from "../commons/Loading";
 import { TextInput } from "../commons/TextInput";
 import { TextInputPhoneNumber } from "../commons/TextInputPhoneNumber";
 
 export const SignUpForm = ({ navigation }) => {
+  const { loading, register, user } = useAuthStore((state) => ({
+    user: state.user,
+    error: state.error,
+    loading: state.loading,
+    register: state.register,
+    logout: state.logout,
+  }));
+  const handleRegister = async (values) => {
+    await register(values);
+    if (user) navigation.push("HomeScreen");
+  };
+
   return (
     <View style={styles.container}>
       <Formik
@@ -20,7 +34,7 @@ export const SignUpForm = ({ navigation }) => {
           phoneNumber: "",
           birthday: getMinimumRegistrationAge(),
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => handleRegister(values)}
         validationSchema={signUpSchema}
         validateOnMount={true}
       >
@@ -110,6 +124,7 @@ export const SignUpForm = ({ navigation }) => {
           </>
         )}
       </Formik>
+      {loading && <Loading />}
     </View>
   );
 };
