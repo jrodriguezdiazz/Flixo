@@ -9,7 +9,7 @@ import { Verification } from "../screens/Verification";
 
 export const DEFAULT_IMAGE = "https://placehold.co/600x600/png";
 export const SCREEN_MAP = {
-  defaultScreen: "ProfileScreen",
+  defaultScreen: "LoginScreen",
   screens: [
     {
       name: "HomeScreen",
@@ -20,7 +20,7 @@ export const SCREEN_MAP = {
       component: Login,
     },
     {
-      name: "SingUpScreen",
+      name: "SignUpScreen",
       component: SignUp,
     },
     {
@@ -50,10 +50,30 @@ export const VERIFICATION_CELL_COUNT = 6;
 export const MAXIMUM_NUMBER_OF_CHARACTERS_FOR_MESSAGE = 40;
 
 export const POST_ACTIONS = [
-  { iconName: "md-chatbubbles-outline", name: "commnet" },
   {
-    iconName: "md-bonfire-outline",
+    iconName: "comment-multiple-outline",
+    name: "Comment",
+  },
+  {
+    iconName: "fire",
     name: "Fire",
   },
-  { iconName: "send-outline", name: "Send" },
+  {
+    iconName: "share",
+    name: "Share",
+  },
 ];
+
+export const theme = {
+  colors: {
+    sunflower: "#e4c220",
+    safetyYellow: "#f5d40f",
+    flax: "#f3e397",
+    white: "#fbfbfb",
+    bone: "#eadfce",
+    alabaster: "#eee6da",
+    error: "#ff2929ff",
+    back: "#000000",
+    payneGrey: "#3C3C43",
+  },
+};
