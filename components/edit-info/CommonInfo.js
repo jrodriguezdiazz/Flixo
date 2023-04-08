@@ -20,7 +20,7 @@ export const CommonInfo = () => {
         <Button
           action={() => ({})}
           icon={"send-clock"}
-          label={"Save"}
+          label={"Update"}
         />
       </View>
     </View>
