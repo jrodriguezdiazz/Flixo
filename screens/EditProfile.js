@@ -1,22 +1,31 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ProfilePicture } from "../components/commons/ProfilePicture";
 import { ChangeProfilePhoto } from "../components/edit-info/ChangeProfilePhoto";
 import { CommonInfo } from "../components/edit-info/CommonInfo";
-import { USER_DATA } from "../data/user";
+import { useAuthStore } from "../stores/useAuthStore";
 
 export const EditProfile = () => {
-  const { profilePicture } = USER_DATA;
+  const { user, loading } = useAuthStore();
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+
+  if (!user) {
+    return <Text>No user found</Text>;
+  }
+
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
           <ProfilePicture
             size={80}
-            uri={profilePicture}
+            uri={user.profilePicture}
           />
           <ChangeProfilePhoto />
-          <CommonInfo />
+          <CommonInfo user={user} />
         </View>
       </ScrollView>
     </SafeAreaView>
