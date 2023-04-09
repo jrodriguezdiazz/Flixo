@@ -23,8 +23,8 @@ export const LoginForm = ({ navigation }) => {
     login: state.login,
     logout: state.logout,
   }));
-  const handleLogin = async ({ username, password }) => {
-    await login(username, password);
+  const handleLogin = async (values) => {
+    await login(values);
     if (user) navigation.push("HomeScreen");
   };
 
