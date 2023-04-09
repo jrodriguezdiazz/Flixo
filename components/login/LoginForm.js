@@ -25,6 +25,7 @@ export const LoginForm = ({ navigation }) => {
   }));
   const handleLogin = async (values) => {
     await login(values);
+    if (error) Alert({ navigation });
     if (user) navigation.push("HomeScreen");
   };
 
@@ -34,7 +35,7 @@ export const LoginForm = ({ navigation }) => {
       <Formik
         initialValues={{
           password: "",
-          username: "",
+          email: "",
         }}
         onSubmit={(values) => handleLogin(values)}
         validationSchema={loginSchema}
@@ -43,15 +44,15 @@ export const LoginForm = ({ navigation }) => {
         {({ handleBlur, handleChange, handleSubmit, values, isValid }) => (
           <View style={styles.container}>
             <TextInput
-              label={"Username"}
+              label={"Email"}
               autoCapitalize={"none"}
               keyboardType={"email-address"}
               textContent={"emailAddress"}
               autoFocus={true}
-              name={"username"}
-              onChangeText={handleChange("username")}
-              onBlur={handleBlur("username")}
-              value={values.username}
+              name={"email"}
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              value={values.email}
             />
             <TextInput
               label={"Password"}
@@ -93,7 +94,6 @@ export const LoginForm = ({ navigation }) => {
           </View>
         )}
       </Formik>
-      {error && Alert({ navigation })}
       {loading && <Loading />}
     </>
   );
