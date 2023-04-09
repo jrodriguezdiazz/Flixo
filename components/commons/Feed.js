@@ -9,7 +9,6 @@ export const Feed = ({ isScrollView = true }) => {
   if (isLoading) {
     return <Text>Loading...</Text>;
   }
-  console.log(posts);
   const postMap = posts.map((post) => (
     <View key={post.id}>
       <Post post={post} />
