@@ -7,6 +7,7 @@ import {
   PROJECT_ID,
   STORAGE_BUCKET,
 } from "@env";
+import auth from "@react-native-firebase/auth";
 import firebase from "firebase/compat";
 import { DEFAULT_IMAGE } from "./utils/constant";
 
@@ -132,6 +133,19 @@ export const getUserById = async (userId) => {
     };
   } else {
     return null;
+  }
+};
+
+export const sendVerificationEmail = async (email) => {
+  await auth().sendPasswordResetEmail(email);
+};
+
+export const confirmPasswordReset = async (code, newPassword) => {
+  try {
+    await auth().confirmPasswordReset(code, newPassword);
+    console.log("Password reset successful");
+  } catch (error) {
+    console.log("Error resetting password:", error);
   }
 };
 

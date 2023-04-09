@@ -1,3 +1,4 @@
+import { Formik } from "formik";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import {
@@ -6,6 +7,7 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
+import { verification } from "../../schema/verification";
 import { theme, VERIFICATION_CELL_COUNT } from "../../utils/constant";
 import { Button } from "../commons/Button";
 
@@ -21,30 +23,65 @@ export const VerificationForm = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Verification</Text>
-      <CodeField
-        ref={ref}
-        {...props}
-        value={value}
-        onChangeText={setValue}
-        cellCount={VERIFICATION_CELL_COUNT}
-        rootStyle={styles.codeFieldRoot}
-        keyboardType="number-pad"
-        textContentType="oneTimeCode"
-        renderCell={({ index, symbol, isFocused }) => (
-          <TextInput
-            key={index}
-            style={[styles.cell(colors), isFocused && styles.focusCell(colors)]}
-            onLayout={getCellOnLayoutHandler(index)}
-          >
-            {symbol || (isFocused ? <Cursor /> : null)}
-          </TextInput>
+      <Formik
+        initialValues={{ code: "" }}
+        validationSchema={verification}
+        onSubmit={async (values, { setSubmitting, setFieldError }) => {
+          try {
+            navigation.push("NewPasswordScreen");
+          } catch (error) {
+            setFieldError("code", error.message);
+          }
+          setSubmitting(false);
+        }}
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+          isSubmitting,
+        }) => (
+          <View>
+            <CodeField
+              ref={ref}
+              {...props}
+              value={value}
+              onChangeText={setValue}
+              cellCount={VERIFICATION_CELL_COUNT}
+              rootStyle={styles.codeFieldRoot}
+              keyboardType="number-pad"
+              textContentType="oneTimeCode"
+              renderCell={({ index, symbol, isFocused }) => (
+                <TextInput
+                  key={index}
+                  style={[
+                    styles.cell(colors),
+                    isFocused && styles.focusCell(colors),
+                  ]}
+                  onLayout={getCellOnLayoutHandler(index)}
+                  onChangeText={handleChange("code")}
+                  onBlur={handleBlur("code")}
+                  value={values.code}
+                >
+                  {symbol || (isFocused ? <Cursor /> : null)}
+                </TextInput>
+              )}
+            />
+            {touched.code && errors.code && (
+              <Text style={styles.error}>{errors.code}</Text>
+            )}
+            <Button
+              label={"Verify"}
+              icon={"send-outline"}
+              action={handleSubmit}
+              isLoading={isSubmitting}
+            />
+          </View>
         )}
-      />
-      <Button
-        label={"Verify"}
-        icon={"send-outline"}
-        action={() => navigation.push("NewPasswordScreen")}
-      />
+      </Formik>
     </View>
   );
 };
