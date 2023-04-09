@@ -1,14 +1,8 @@
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Divider } from "react-native-elements";
-import { usePosts } from "../../hooks/usePosts";
 import { Post } from "../post/Post";
 
-export const Feed = ({ isScrollView = true }) => {
-  const { posts, isLoading } = usePosts();
-
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
+export const Feed = ({ isScrollView = true, posts }) => {
   const postMap = posts.map((post) => (
     <View key={post.id}>
       <Post post={post} />

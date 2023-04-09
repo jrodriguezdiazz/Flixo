@@ -3,7 +3,6 @@ import { ActivityIndicator } from "react-native-paper";
 import { Feed } from "../components/commons/Feed";
 import { Logout } from "../components/profile-info/Logout";
 import { ProfileInfo } from "../components/profile-info/ProfileInfo";
-import { USER_DATA } from "../data/user";
 import { useAuthStore } from "../stores/useAuthStore";
 
 export const Profile = ({ navigation }) => {
@@ -17,7 +16,6 @@ export const Profile = ({ navigation }) => {
     return <Text>No user found</Text>;
   }
 
-  const { posts } = USER_DATA;
   return (
     <ScrollView>
       <View>
@@ -27,7 +25,7 @@ export const Profile = ({ navigation }) => {
         />
         <Logout navigation={navigation} />
         <Feed
-          post={posts}
+          posts={user.posts}
           isScrollView={false}
         />
       </View>

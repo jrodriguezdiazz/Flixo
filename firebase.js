@@ -82,13 +82,36 @@ export const loginUserWithGoogle = async () => {
 };
 
 export const getUserById = async (userId) => {
-  const userRef = firebase.firestore().collection("users").doc(userId);
-  const userDoc = await userRef.get();
+  const userDoc = await firebase
+    .firestore()
+    .collection("users")
+    .doc(userId)
+    .get();
+  const userData = userDoc.data();
 
-  if (userDoc.exists) {
-    return userDoc.data();
+  if (userData) {
+    const postsQuerySnapshot = await firebase
+      .firestore()
+      .collection(`users/${userId}/posts`)
+      .get();
+    const posts = [];
+
+    postsQuerySnapshot.forEach((doc) => {
+      const postData = doc.data();
+      posts.push({
+        id: doc.id,
+        ...postData,
+        username: userData.username,
+        bio: userData.bio,
+        profilePicture: userData.profilePicture,
+      });
+    });
+
+    return {
+      ...userData,
+      posts,
+    };
   } else {
-    console.log(`No user found with ID ${userId}`);
     return null;
   }
 };
