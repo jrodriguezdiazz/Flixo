@@ -8,7 +8,7 @@ export const Logout = ({ navigation }) => {
   }));
 
   const handleLogout = async () => {
-    await logout(navigation);
+    await logout({ navigation });
   };
 
   return (
