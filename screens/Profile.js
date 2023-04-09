@@ -1,5 +1,6 @@
 import { ScrollView, View } from "react-native";
 import { Feed } from "../components/commons/Feed";
+import { Logout } from "../components/profile-info/Logout";
 import { ProfileInfo } from "../components/profile-info/ProfileInfo";
 import { USER_DATA } from "../data/user";
 
@@ -9,6 +10,7 @@ export const Profile = ({ navigation }) => {
     <ScrollView>
       <View>
         <ProfileInfo navigation={navigation} />
+        <Logout navigation={navigation} />
         <Feed
           post={posts}
           isScrollView={false}
