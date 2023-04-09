@@ -14,7 +14,6 @@ export const usePosts = () => {
         const posts = await Promise.all(
           postSnapshot.docs.map(async (postDoc) => {
             const postData = postDoc.data();
-            console.log(postData);
             // Get user information
             const userDoc = await database
               .collection("users")
