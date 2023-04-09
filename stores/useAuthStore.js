@@ -15,8 +15,11 @@ export const useAuthStore = create((set) => ({
     try {
       set({ loading: true });
       const user = await loginUser(values);
-      console.log(user);
-      set({ user, error: null, loading: false });
+      set({
+        user: { ...user, ...(await getUserById(user.uid)) },
+        error: null,
+        loading: false,
+      });
     } catch (error) {
       set({ error, loading: false });
     }
@@ -56,26 +59,6 @@ export const useAuthStore = create((set) => ({
       navigation.push("LoginScreen");
     } catch (error) {
       set({ error, loading: false });
-    }
-  },
-  fetchUser: async () => {
-    try {
-      set({ loading: true });
-      const userCredential = await firebase.auth().currentUser;
-      if (userCredential) {
-        const user = {
-          ...userCredential,
-          ...(await getUserById(userCredential.uid)),
-        };
-        set(() => ({ user }));
-        console.log(user);
-      } else {
-        set(() => ({ user: null }));
-      }
-    } catch (error) {
-      set({ error, loading: false });
-    } finally {
-      set(() => ({ loading: false }));
     }
   },
 }));
