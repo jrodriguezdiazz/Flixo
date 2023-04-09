@@ -41,13 +41,32 @@ export const registerUser = async (values) => {
     .auth()
     .createUserWithEmailAndPassword(email, password);
 
+  const userRef = database.collection("users").doc(userCredential.user.uid);
+
   await userCredential.user.updateProfile({
     photoURL: DEFAULT_IMAGE,
     displayName: `${firstName} ${lastName}`,
   });
 
-  await database.collection("users").add({
+  await userRef.set({
     id: userCredential.user.uid,
+    bio: "",
+    fullName: `${firstName} ${lastName}`,
+    profilePicture: DEFAULT_IMAGE,
+    statics: [
+      {
+        label: "Post",
+        number: 0,
+      },
+      {
+        label: "Followers",
+        number: 0,
+      },
+      {
+        label: "Following",
+        number: 0,
+      },
+    ],
     username,
     password,
     firstName,

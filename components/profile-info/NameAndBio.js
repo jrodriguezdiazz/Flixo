@@ -5,7 +5,7 @@ export const NameAndBio = ({ user }) => {
     <View style={styles.container}>
       <Text>{user.fullName}</Text>
       {user.bio && <Text>{user.bio}</Text>}
-      <Text style={styles.username}>{user.username}</Text>
+      <Text style={styles.username}>@{user.username}</Text>
     </View>
   );
 };
