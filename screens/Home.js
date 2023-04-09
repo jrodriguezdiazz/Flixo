@@ -5,7 +5,7 @@ import { POSTS } from "../data/post";
 export const HomeScreen = () => {
   return (
     <View>
-      <Feed post={POSTS} />
+      <Feed posts={POSTS} />
     </View>
   );
 };
