@@ -1,66 +1,35 @@
 import { useEffect, useState } from "react";
 import { database } from "../firebase";
 
-export const usePosts = () => {
+export const useAllPosts = () => {
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const postSnapshot = await database.collectionGroup("posts").get();
+    const getAllPosts = async () => {
+      const postSnapshots = await database.collectionGroup("posts").get();
 
-        const posts = await Promise.all(
-          postSnapshot.docs.map(async (postDoc) => {
-            const postData = postDoc.data();
-            // Get user information
-            const userDoc = await database
-              .collection("users")
-              .doc(postData.username)
-              .get();
+      const postPromises = postSnapshots.docs.map(async (postDoc) => {
+        const postData = postDoc.data();
 
-            const userData = userDoc.data();
+        const userDoc = await postDoc.ref.parent.parent.get();
+        const userData = userDoc.data();
 
-            const comments = await Promise.all(
-              postData.comments.map(async (comment) => {
-                const commentUserDoc = await database
-                  .collection("users")
-                  .doc(comment.userId)
-                  .get();
+        return {
+          id: postDoc.id,
+          ...postData,
+          username: userData.username,
+          bio: userData.bio,
+          profilePicture: userData.profilePicture,
+        };
+      });
 
-                const commentUserData = commentUserDoc.data();
-
-                return {
-                  user: commentUserData.username,
-                  caption: comment.caption,
-                };
-              })
-            );
-
-            return {
-              id: postDoc.id,
-              username: userData.username,
-              profilePicture: userData.profilePicture,
-              imageURL: postData.imageURL,
-              date: postData.date,
-              likes: postData.likes,
-              caption: postData.caption,
-              comments,
-            };
-          })
-        );
-
-        setPosts(posts);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error);
-        setIsLoading(false);
-      }
+      const allPosts = await Promise.all(postPromises);
+      console.log(allPosts);
+      setPosts(allPosts);
     };
 
-    fetchPosts();
+    getAllPosts();
   }, []);
 
-  return { posts, isLoading, error };
+  return posts;
 };
