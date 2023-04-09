@@ -3,7 +3,6 @@
     "name": "Flixo",
     "slug": "Flixo",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "android"
     ],
