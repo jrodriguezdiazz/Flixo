@@ -6,17 +6,17 @@ import { ButtonEditProfileInfo } from "../profile-info/ButtonEditProfileInfo";
 import { NameAndBio } from "../profile-info/NameAndBio";
 import { Statistics } from "../profile-info/Statistics";
 
-export const ProfileInfo = ({ navigation }) => {
-  const { profilePicture, isOwnProfile } = USER_DATA;
+export const ProfileInfo = ({ navigation, user }) => {
+  const { isOwnProfile } = USER_DATA;
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <ProfilePicture
           size={100}
-          uri={profilePicture}
+          uri={user.profilePicture}
         />
-        <NameAndBio />
-        <Statistics />
+        <NameAndBio user={user} />
+        <Statistics user={user} />
         {isOwnProfile && <ButtonEditProfileInfo navigation={navigation} />}
       </View>
     </SafeAreaView>

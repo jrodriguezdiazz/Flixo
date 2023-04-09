@@ -1,17 +1,17 @@
 import { StyleSheet, View } from "react-native";
 import { TextInput as RNPTextInput } from "react-native-paper";
-import { USER_DATA } from "../../data/user";
+import { useAuthStore } from "../../stores/useAuthStore";
 import { ProfilePicture } from "../commons/ProfilePicture";
 import { TextInput } from "../commons/TextInput";
 
 export const Header = ({ navigation }) => {
-  const { profilePicture } = USER_DATA;
+  const { user } = useAuthStore();
   return (
     <View style={styles.container}>
       <View style={styles.profilePicture}>
         <ProfilePicture
           goTo={() => navigation.push("ProfileScreen")}
-          uri={profilePicture}
+          uri={user.profilePicture}
         />
       </View>
 
