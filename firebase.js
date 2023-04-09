@@ -81,4 +81,16 @@ export const loginUserWithGoogle = async () => {
   return userCredential.user;
 };
 
+export const getUserById = async (userId) => {
+  const userRef = firebase.firestore().collection("users").doc(userId);
+  const userDoc = await userRef.get();
+
+  if (userDoc.exists) {
+    return userDoc.data();
+  } else {
+    console.log(`No user found with ID ${userId}`);
+    return null;
+  }
+};
+
 export default firebase;
