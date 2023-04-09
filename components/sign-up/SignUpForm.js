@@ -15,7 +15,6 @@ export const SignUpForm = ({ navigation }) => {
     error: state.error,
     loading: state.loading,
     register: state.register,
-    logout: state.logout,
   }));
   const handleRegister = async (values) => {
     await register(values);
@@ -58,6 +57,7 @@ export const SignUpForm = ({ navigation }) => {
                 errorMessage={errors.username}
               />
               <TextInput
+                autoCorrect={false}
                 label="Password"
                 secureTextEntry={true}
                 name={"password"}
@@ -85,6 +85,7 @@ export const SignUpForm = ({ navigation }) => {
               <TextInput
                 label="Email"
                 name={"email"}
+                autoCorrect={false}
                 onChangeText={handleChange("email")}
                 onBlur={handleBlur("email")}
                 value={values.email}
