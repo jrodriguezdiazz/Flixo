@@ -9,6 +9,7 @@ import {
 } from "@env";
 import auth from "@react-native-firebase/auth";
 import firebase from "firebase/compat";
+import moment from "moment";
 import { DEFAULT_IMAGE } from "./utils/constant";
 
 const firebaseConfig = {
@@ -177,6 +178,24 @@ export const checkIfFieldValueExistsInUsersCollection = async (
       error
     );
     return false;
+  }
+};
+
+export const addPostByForm = async (post, userId) => {
+  try {
+    const userPostsRef = database
+      .collection("users")
+      .doc(userId)
+      .collection("posts");
+
+    await userPostsRef.add({
+      ...post,
+      comments: [],
+      date: moment().format(),
+      fire: 0,
+    });
+  } catch (error) {
+    console.error("Error adding post:", error);
   }
 };
 

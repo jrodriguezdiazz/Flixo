@@ -2,29 +2,37 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import validUrl from "valid-url";
+import { addPostByForm } from "../../firebase";
 
 import { uploadPostSchema } from "../../schema/newPost";
+import { useAuthStore } from "../../stores/useAuthStore";
 import { DEFAULT_IMAGE, theme } from "../../utils/constant";
 import { Button } from "../commons/Button";
 
 export const FormikPostUploader = () => {
   const { colors } = theme;
+  const { user } = useAuthStore((state) => ({
+    user: state.user,
+  }));
+
   const [thumbnail, setThumbnail] = useState(DEFAULT_IMAGE);
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      await addPostByForm(values, user._delegate.uid);
+      setThumbnail(DEFAULT_IMAGE);
+      resetForm();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <Formik
       initialValues={{ caption: "", imageURL: "" }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={handleSubmit}
       validationSchema={uploadPostSchema}
       validateOnMount={true}
     >
-      {({
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        values,
-        errors,
-        isValid,
-      }) => (
+      {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
         <>
           <View>
             <View>
@@ -62,7 +70,6 @@ export const FormikPostUploader = () => {
               action={handleSubmit}
               label={"Share"}
               icon={"camera"}
-              disabled={isValid}
             />
           </View>
         </>

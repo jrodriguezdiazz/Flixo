@@ -3,18 +3,13 @@ import { theme } from "../../utils/constant";
 
 export const PostReaction = ({ post }) => {
   const { colors } = theme;
-  const numberOfComments = post.comments.length;
+  const numberOfComments = post?.comments.length || 0;
   return (
     <View style={styles.container}>
       <Text style={styles.resume(colors)}>
-        {post.fire.toLocaleString()} fires{" "}
+        {post.fire} fires and {numberOfComments}
+        {numberOfComments > 1 ? " comments" : " comment"}
       </Text>
-      {numberOfComments && (
-        <Text style={styles.resume(colors)}>
-          and {numberOfComments}
-          {numberOfComments > 1 ? " comments" : " comment"}
-        </Text>
-      )}
     </View>
   );
 };
