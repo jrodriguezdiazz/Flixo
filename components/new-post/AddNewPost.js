@@ -1,11 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import { FormikPostUploader } from "./FormikPostUploader";
 
-export const AddNewPost = () => {
+export const AddNewPost = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.form}>
-        <FormikPostUploader />
+        <FormikPostUploader navigation={navigation} />
       </View>
     </View>
   );

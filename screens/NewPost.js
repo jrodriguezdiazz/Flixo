@@ -1,10 +1,12 @@
 import { StyleSheet, View } from "react-native";
 import { AddNewPost } from "../components/new-post/AddNewPost";
 
-export const NewPost = () => {
+export const NewPost = ({ route }) => {
+  const navigation = route.params.navigation;
+
   return (
     <View style={styles.container}>
-      <AddNewPost />
+      <AddNewPost navigation={navigation} />
     </View>
   );
 };

@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import { useState } from "react";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { Divider } from "react-native-elements";
 import validUrl from "valid-url";
 import { addPostByForm } from "../../firebase";
 
@@ -9,7 +10,7 @@ import { useAuthStore } from "../../stores/useAuthStore";
 import { DEFAULT_IMAGE, theme } from "../../utils/constant";
 import { Button } from "../commons/Button";
 
-export const FormikPostUploader = () => {
+export const FormikPostUploader = ({ navigation }) => {
   const { colors } = theme;
   const { user } = useAuthStore((state) => ({
     user: state.user,
@@ -70,6 +71,15 @@ export const FormikPostUploader = () => {
               action={handleSubmit}
               label={"Share"}
               icon={"camera"}
+            />
+            <Divider
+              width={1}
+              orientation={"vertical"}
+            />
+            <Button
+              action={() => navigation.push("AddPostScreen")}
+              label={"Take a photo!"}
+              icon={"camera-enhance-outline"}
             />
           </View>
         </>

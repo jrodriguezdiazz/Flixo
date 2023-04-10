@@ -7,7 +7,7 @@ import { NewPost } from "../../screens/NewPost";
 import { NotificationScreen } from "../../screens/Notification";
 
 const Tab = createMaterialTopTabNavigator();
-export const Navbar = () => {
+export const Navbar = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Tab.Navigator
@@ -49,6 +49,7 @@ export const Navbar = () => {
           name="New Post"
           component={NewPost}
           options={{ tabBarLabel: "New Post" }}
+          initialParams={{ navigation }}
         />
         <Tab.Screen
           name="Notification"

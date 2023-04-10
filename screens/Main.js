@@ -12,7 +12,7 @@ export const Main = ({ navigation }) => {
         width={1}
         orientation={"vertical"}
       />
-      <Navbar />
+      <Navbar navigation={navigation} />
     </SafeAreaView>
   );
 };
