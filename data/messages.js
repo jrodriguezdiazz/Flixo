@@ -2,7 +2,7 @@ import { DEFAULT_IMAGE } from "../utils/constant";
 
 export const MESSAGES = [
   {
-    id: "1",
+    id: "11",
     header: "darlene_steward",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
@@ -11,7 +11,7 @@ export const MESSAGES = [
     seen: false,
   },
   {
-    id: "2",
+    id: "12",
     header: "homero_john",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
@@ -21,7 +21,7 @@ export const MESSAGES = [
     seen: true,
   },
   {
-    id: "3",
+    id: "13",
     header: "lee_williamson",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
@@ -30,7 +30,7 @@ export const MESSAGES = [
     seen: true,
   },
   {
-    id: "4",
+    id: "14",
     header: "ronald_mccoy",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",
@@ -39,7 +39,7 @@ export const MESSAGES = [
     seen: true,
   },
   {
-    id: "5",
+    id: "15",
     header: "albert_bell",
     profilePicture: DEFAULT_IMAGE,
     goTo: "",

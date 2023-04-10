@@ -19,7 +19,6 @@ export const Header = ({ navigation }) => {
       <View style={styles.searchInput}>
         <TextInput
           label={"Search"}
-          keyboardType={"text"}
           right={<RNPTextInput.Icon icon="magnify" />}
         />
       </View>

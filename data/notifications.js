@@ -47,7 +47,7 @@ export const NOTIFICATIONS = [
     seen: true,
   },
   {
-    id: "5",
+    id: "6",
     user: "darrell_trivedi",
     header: "darrell_trivedi liked your post.",
     profilePicture: DEFAULT_IMAGE,
@@ -56,7 +56,7 @@ export const NOTIFICATIONS = [
     seen: true,
   },
   {
-    id: "6",
+    id: "26",
     user: "darrell_trivedi",
     header: "darrell_trivedi liked your post.",
     profilePicture: DEFAULT_IMAGE,
