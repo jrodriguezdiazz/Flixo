@@ -24,7 +24,6 @@ export const useAllPosts = () => {
       });
 
       const allPosts = await Promise.all(postPromises);
-      console.log(allPosts);
       setPosts(allPosts);
     };
 

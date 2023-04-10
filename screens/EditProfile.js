@@ -7,7 +7,12 @@ import { CommonInfo } from "../components/edit-info/CommonInfo";
 import { useAuthStore } from "../stores/useAuthStore";
 
 export const EditProfile = () => {
-  const { user, loading } = useAuthStore();
+  const { user, loading, updateUser } = useAuthStore((state) => ({
+    user: state.user,
+    loading: state.loading,
+    updateUser: state.updateUser,
+  }));
+
   if (loading) {
     return <ActivityIndicator />;
   }
@@ -25,7 +30,10 @@ export const EditProfile = () => {
             uri={user.profilePicture}
           />
           <ChangeProfilePhoto />
-          <CommonInfo user={user} />
+          <CommonInfo
+            user={user}
+            updateUser={updateUser}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

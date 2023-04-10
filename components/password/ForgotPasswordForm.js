@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import { StyleSheet, Text, View } from "react-native";
-import { sendVerificationEmail } from "../../firebase";
+// import { sendVerificationEmail } from "../../firebase";
 import { forgotPassword } from "../../schema/forgotPassword";
 import { Button } from "../commons/Button";
 import { TextInput } from "../commons/TextInput";
@@ -8,7 +8,8 @@ import { TextInput } from "../commons/TextInput";
 export const ForgotPasswordForm = ({ navigation }) => {
   const handleSendEmail = async ({ email }) => {
     try {
-      await sendVerificationEmail(email);
+      console.log(email);
+      // await sendVerificationEmail(email);
       navigation.push("VerificationScreen");
     } catch (e) {
       console.error(e);

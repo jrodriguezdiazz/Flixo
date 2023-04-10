@@ -61,4 +61,16 @@ export const useAuthStore = create((set) => ({
       set({ error, loading: false });
     }
   },
+  updateUser: (userData) => {
+    try {
+      set((state) => ({
+        user: {
+          ...state.user,
+          ...userData,
+        },
+      }));
+    } catch (error) {
+      set({ error, loading: false });
+    }
+  },
 }));

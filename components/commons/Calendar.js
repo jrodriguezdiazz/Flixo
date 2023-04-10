@@ -8,7 +8,7 @@ import { ErrorMessage } from "../commons/ErrorMessage";
 
 export const Calendar = ({ errorMessage, value, name, ...props }) => {
   const formikProps = useFormikContext();
-
+  console.log({ formikProps });
   const [showStartDate, setShowStartDate] = useState(false);
   const onChangeStartDate = (event, selectedDate) => {
     setShowStartDate(false);

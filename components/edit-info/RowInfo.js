@@ -1,16 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
-import { TextInput } from "../commons/TextInput";
 
-export const RowInfo = ({ label }) => {
+export const RowInfo = ({ label, children }) => {
   return (
     <View style={styles.container}>
       <View style={styles.label}>
         <Text>{label}</Text>
       </View>
-      <TextInput
-        isOutlineTransparent={true}
-        style={styles.textInput}
-      />
+      {children}
     </View>
   );
 };

@@ -149,4 +149,35 @@ export const confirmPasswordReset = async (code, newPassword) => {
   }
 };
 
+export const updateUserInfo = async (user) => {
+  const userRef = firebase.firestore().collection("users").doc(user.id);
+  await userRef.update({
+    username: user.username,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    bio: user.bio,
+    email: user.email,
+    phone: user.phone,
+    birthday: user.birthday,
+  });
+};
+
+export const checkIfFieldValueExistsInUsersCollection = async (
+  fields,
+  value
+) => {
+  try {
+    const usersRef = database.collection("users");
+    const querySnapshot = await usersRef.where(fields, "==", value).get();
+
+    return !querySnapshot.empty;
+  } catch (error) {
+    console.error(
+      "Error checking if field value exists in users collection:",
+      error
+    );
+    return false;
+  }
+};
+
 export default firebase;
