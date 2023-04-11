@@ -78,7 +78,7 @@ export const registerUser = async (values) => {
     birthday,
   });
 
-  return userCredential.user;
+  return await getUserById(userCredential.user.uid);
 };
 
 export const registerUserWithGoogle = async () => {
@@ -172,7 +172,7 @@ export const checkIfFieldValueExistsInUsersCollection = async (
     const usersRef = database.collection("users");
     const querySnapshot = await usersRef.where(fields, "==", value).get();
 
-    return !querySnapshot.empty;
+    return querySnapshot.empty;
   } catch (error) {
     console.error(
       "Error checking if field value exists in users collection:",

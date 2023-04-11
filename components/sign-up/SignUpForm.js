@@ -33,7 +33,7 @@ export const SignUpForm = ({ navigation }) => {
           phoneNumber: "",
           birthday: getMinimumRegistrationAge(),
         }}
-        onSubmit={(values) => handleRegister(values)}
+        onSubmit={handleRegister}
         validationSchema={signUpSchema}
         validateOnMount={true}
       >
@@ -42,7 +42,6 @@ export const SignUpForm = ({ navigation }) => {
           handleChange,
           handleSubmit,
           values,
-          isValid,
           errors,
           touched,
         }) => (
@@ -127,8 +126,6 @@ export const SignUpForm = ({ navigation }) => {
               label={"Agree & Join"}
               icon={"login"}
               action={handleSubmit}
-              disabled={!isValid}
-              isValid={isValid}
             />
           </>
         )}
