@@ -9,10 +9,11 @@ export const TextInput = ({
   isValid = true,
   errorMessage,
   secureTextEntry,
+  isTouched = false,
   ...props
 }) => {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(secureTextEntry);
-
+  const showError = isTouched && errorMessage;
   const { colors } = theme;
   return (
     <View style={styles.container}>
@@ -33,7 +34,7 @@ export const TextInput = ({
         }
         {...props}
       />
-      {errorMessage && <ErrorMessage message={errorMessage} />}
+      {showError && <ErrorMessage message={errorMessage} />}
     </View>
   );
 };

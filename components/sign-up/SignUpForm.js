@@ -44,6 +44,7 @@ export const SignUpForm = ({ navigation }) => {
           values,
           isValid,
           errors,
+          touched,
         }) => (
           <>
             <View>
@@ -55,6 +56,7 @@ export const SignUpForm = ({ navigation }) => {
                 onBlur={handleBlur("username")}
                 value={values.username}
                 errorMessage={errors.username}
+                isTouched={touched.username}
               />
               <TextInput
                 autoCorrect={false}
@@ -65,6 +67,7 @@ export const SignUpForm = ({ navigation }) => {
                 onBlur={handleBlur("password")}
                 value={values.password}
                 errorMessage={errors.password}
+                isTouched={touched.password}
               />
               <TextInput
                 label="First Name"
@@ -73,6 +76,7 @@ export const SignUpForm = ({ navigation }) => {
                 onBlur={handleBlur("firstName")}
                 value={values.firstName}
                 errorMessage={errors.firstName}
+                isTouched={touched.firstName}
               />
               <TextInput
                 label="Last Name"
@@ -81,6 +85,7 @@ export const SignUpForm = ({ navigation }) => {
                 onBlur={handleBlur("lastName")}
                 value={values.lastName}
                 errorMessage={errors.lastName}
+                isTouched={touched.lastName}
               />
               <TextInput
                 label="Email"
@@ -90,6 +95,7 @@ export const SignUpForm = ({ navigation }) => {
                 onBlur={handleBlur("email")}
                 value={values.email}
                 errorMessage={errors.email}
+                isTouched={touched.email}
               />
               <TextInputPhoneNumber
                 label="Pone Number"
@@ -98,6 +104,7 @@ export const SignUpForm = ({ navigation }) => {
                 onBlur={handleBlur("phoneNumber")}
                 value={values.phoneNumber}
                 errorMessage={errors.phoneNumber}
+                isTouched={touched.phoneNumber}
               />
               <Calendar
                 style={styles.calendar}
@@ -106,6 +113,7 @@ export const SignUpForm = ({ navigation }) => {
                 onBlur={handleBlur("birthday")}
                 value={values.birthday}
                 errorMessage={errors.birthday}
+                isTouched={touched.birthday}
               />
             </View>
             <View style={styles.disclaimer}>
