@@ -10,7 +10,7 @@ import { SectionInfo } from "./SectionInfo";
 export const CommonInfo = ({ user, updateUser }) => {
   const handleFormSubmit = async (values) => {
     try {
-      await updateUser({ ...values, id: user._delegate.uid });
+      await updateUser({ ...values, id: user.userId });
       alert("User info updated successfully!");
     } catch (error) {
       alert(`Error updating user info: ${error.message}`);

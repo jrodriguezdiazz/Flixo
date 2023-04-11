@@ -1,16 +1,12 @@
 import { ScrollView, Text, View } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
 import { Feed } from "../components/commons/Feed";
-import { Logout } from "../components/profile-info/Logout";
+
 import { ProfileInfo } from "../components/profile-info/ProfileInfo";
-import { useAuthStore } from "../stores/useAuthStore";
+import { useUserById } from "../hooks/useUserById ";
 
-export const Profile = ({ navigation }) => {
-  const { user, loading } = useAuthStore();
-
-  if (loading) {
-    return <ActivityIndicator />;
-  }
+export const Profile = ({ navigation, route }) => {
+  const { userId } = route.params;
+  const user = useUserById(userId);
 
   if (!user) {
     return <Text>No user found</Text>;
@@ -23,10 +19,10 @@ export const Profile = ({ navigation }) => {
           navigation={navigation}
           user={user}
         />
-        <Logout navigation={navigation} />
         <Feed
           posts={user.posts}
           isScrollView={false}
+          navigation={navigation}
         />
       </View>
     </ScrollView>

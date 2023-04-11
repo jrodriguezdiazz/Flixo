@@ -19,7 +19,7 @@ export const FormikPostUploader = ({ navigation }) => {
   const [thumbnail, setThumbnail] = useState(DEFAULT_IMAGE);
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      await addPostByForm(values, user._delegate.uid);
+      await addPostByForm(values, user.userId);
       setThumbnail(DEFAULT_IMAGE);
       resetForm();
     } catch (error) {

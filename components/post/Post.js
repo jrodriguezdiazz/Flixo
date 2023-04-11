@@ -6,14 +6,24 @@ import { ProfilePicture } from "../commons/ProfilePicture";
 import { PostFooter } from "./PostFooter";
 import { PostReaction } from "./PostReaction";
 
-export const Post = ({ post }) => {
+export const Post = ({ post, navigation }) => {
+  // console.log(post);
   const { colors } = theme;
   return (
     <Card style={styles.container}>
       <Card.Title
         title={post.username}
         subtitle={post.bio}
-        left={() => <ProfilePicture uri={post.profilePicture} />}
+        left={() => (
+          <ProfilePicture
+            uri={post.profilePicture}
+            goTo={() =>
+              navigation.push("ProfileScreen", {
+                userId: post.userId,
+              })
+            }
+          />
+        )}
         titleStyle={styles.username}
         subtitleStyle={styles.bio(colors)}
       />

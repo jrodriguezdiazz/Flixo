@@ -13,13 +13,13 @@ export const useAllPosts = () => {
 
           const userDoc = await postDoc.ref.parent.parent.get();
           const userData = userDoc.data();
-
           return {
             id: postDoc.id,
             ...postData,
             username: userData.username,
             bio: userData.bio,
             profilePicture: userData.profilePicture,
+            userId: userData.userId,
           };
         });
 

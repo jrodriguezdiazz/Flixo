@@ -11,7 +11,11 @@ export const Header = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.profilePicture}>
         <ProfilePicture
-          goTo={() => navigation.push("ProfileScreen")}
+          goTo={() =>
+            navigation.push("ProfileScreen", {
+              userId: user.userId,
+            })
+          }
           uri={user?.profilePicture || DEFAULT_IMAGE}
         />
       </View>

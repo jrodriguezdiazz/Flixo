@@ -51,7 +51,7 @@ export const registerUser = async (values) => {
   });
 
   await userRef.set({
-    id: userCredential.user.uid,
+    userId: userCredential.user.uid,
     bio: "",
     fullName: `${firstName} ${lastName}`,
     profilePicture: DEFAULT_IMAGE,
@@ -125,6 +125,7 @@ export const getUserById = async (userId) => {
         username: userData.username,
         bio: userData.bio,
         profilePicture: userData.profilePicture,
+        userId: userData.userId,
       });
     });
 
