@@ -4,7 +4,6 @@ import { formatDate } from "../../utils";
 import { DEFAULT_IMAGE, theme } from "../../utils/constant";
 import { ProfilePicture } from "../commons/ProfilePicture";
 import { PostFooter } from "./PostFooter";
-import { PostReaction } from "./PostReaction";
 
 export const Post = ({ post, navigation }) => {
   // console.log(post);
@@ -45,11 +44,8 @@ export const Post = ({ post, navigation }) => {
         style={styles.imagePost}
         source={{ uri: post.imageURL || DEFAULT_IMAGE }}
       />
-      <Card.Content>
-        <PostReaction post={post} />
-      </Card.Content>
       <Card.Actions>
-        <PostFooter />
+        <PostFooter post={post} />
       </Card.Actions>
     </Card>
   );

@@ -49,21 +49,6 @@ export const MINIMUM_REGISTRATION_AGE = 13;
 export const VERIFICATION_CELL_COUNT = 6;
 export const MAXIMUM_NUMBER_OF_CHARACTERS_FOR_MESSAGE = 40;
 
-export const POST_ACTIONS = [
-  {
-    iconName: "comment-multiple-outline",
-    name: "Comment",
-  },
-  {
-    iconName: "fire",
-    name: "Fire",
-  },
-  {
-    iconName: "share",
-    name: "Share",
-  },
-];
-
 export const theme = {
   colors: {
     sunflower: "#e4c220",

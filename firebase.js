@@ -193,10 +193,38 @@ export const addPostByForm = async (post, userId) => {
       ...post,
       comments: [],
       date: moment().format(),
-      fire: 0,
+      fire: [],
     });
   } catch (error) {
     console.error("Error adding post:", error);
+  }
+};
+
+export const addFireUser = async (postId, postOwnerId, userId) => {
+  const postRef = firebase
+    .firestore()
+    .collection("users")
+    .doc(postOwnerId)
+    .collection("posts")
+    .doc(postId);
+
+  const postDoc = await postRef.get();
+  if (!postDoc.exists) {
+    console.log("Post does not exist");
+    return;
+  }
+
+  const post = postDoc.data();
+  const userIdx = post.fire.indexOf(userId);
+
+  if (userIdx === -1) {
+    await postRef.update({
+      fire: firebase.firestore.FieldValue.arrayUnion(userId),
+    });
+  } else {
+    await postRef.update({
+      fire: firebase.firestore.FieldValue.arrayRemove(userId),
+    });
   }
 };
 
