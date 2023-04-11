@@ -37,7 +37,7 @@ export const LoginForm = ({ navigation }) => {
           password: "",
           email: "",
         }}
-        onSubmit={(values) => handleLogin(values)}
+        onSubmit={handleLogin}
         validationSchema={loginSchema}
         validateOnMount={true}
       >
