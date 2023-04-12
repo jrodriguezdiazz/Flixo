@@ -55,7 +55,7 @@ export const useAuthStore = create((set) => ({
     try {
       set({ loading: true });
       await firebase.auth().signOut();
-      set({ user: null, error: null, loading: false });
+      set({ user: {}, error: null, loading: false });
       navigation.push("LoginScreen");
     } catch (error) {
       set({ error, loading: false });

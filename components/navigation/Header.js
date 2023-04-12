@@ -5,7 +5,12 @@ import { DEFAULT_IMAGE } from "../../utils/constant";
 import { ProfilePicture } from "../commons/ProfilePicture";
 import { TextInput } from "../commons/TextInput";
 
-export const Header = ({ navigation }) => {
+export const Header = ({
+  onChangeText = () => ({}),
+  navigation,
+  goToUserSearch = true,
+  value = "",
+}) => {
   const { user } = useAuthStore();
   return (
     <View style={styles.container}>
@@ -22,8 +27,15 @@ export const Header = ({ navigation }) => {
 
       <View style={styles.searchInput}>
         <TextInput
+          value={value}
+          onChangeText={onChangeText}
           label={"Search"}
           right={<RNPTextInput.Icon icon="magnify" />}
+          onFocus={() => {
+            if (goToUserSearch) {
+              navigation.push("UserSearchScreen");
+            }
+          }}
         />
       </View>
     </View>

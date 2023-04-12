@@ -5,6 +5,7 @@ import { Main } from "../screens/Main";
 import { NewPassword } from "../screens/NewPassword";
 import { Profile } from "../screens/Profile";
 import { SignUp } from "../screens/SignUp";
+import { UserSearch } from "../screens/UserSearch";
 import { Verification } from "../screens/Verification";
 
 export const DEFAULT_IMAGE = "https://placehold.co/600x600/png";
@@ -42,6 +43,10 @@ export const SCREEN_MAP = {
     {
       name: "EditProfileScreen",
       component: EditProfile,
+    },
+    {
+      name: "UserSearchScreen",
+      component: UserSearch,
     },
   ],
 };
