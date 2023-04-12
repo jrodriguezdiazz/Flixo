@@ -184,16 +184,30 @@ export const checkIfFieldValueExistsInUsersCollection = async (
 
 export const addPostByForm = async (post, userId) => {
   try {
-    const userPostsRef = database
-      .collection("users")
-      .doc(userId)
-      .collection("posts");
+    const userRef = database.collection("users").doc(userId);
+    const userPostsRef = userRef.collection("posts");
+    const userDoc = await userRef.get();
 
     await userPostsRef.add({
       ...post,
       comments: [],
       date: moment().format(),
       fire: [],
+    });
+
+    const statics = userDoc.data().statics;
+    const updatedStatics = statics.map((item) => {
+      if (item.label === "Posts") {
+        return {
+          ...item,
+          number: item.number + 1,
+        };
+      }
+      return item;
+    });
+
+    await userRef.update({
+      statics: updatedStatics,
     });
   } catch (error) {
     console.error("Error adding post:", error);
