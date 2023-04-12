@@ -3,28 +3,33 @@ import { database } from "../firebase";
 
 export const useNotifications = (userId) => {
   const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = database
-      .collection("users")
-      .doc(userId)
-      .collection("notifications")
-      .orderBy("date", "desc")
-      .onSnapshot((querySnapshot) => {
-        const updatedNotifications = [];
+    const getNotifications = async () => {
+      try {
+        const querySnapshot = await database
+          .collection("users")
+          .doc(userId)
+          .collection("notifications")
+          .orderBy("date", "desc")
+          .get();
 
-        querySnapshot.forEach((doc) => {
-          updatedNotifications.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-        });
+        const updatedNotifications = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
 
         setNotifications(updatedNotifications);
-      });
+        setLoading(false);
+      } catch (error) {
+        console.error("Error getting notifications:", error);
+        setLoading(false);
+      }
+    };
 
-    return () => unsubscribe();
-  }, [userId, notifications]);
+    getNotifications();
+  }, [userId]);
 
-  return notifications;
+  return { notifications, loading };
 };

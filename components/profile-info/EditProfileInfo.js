@@ -1,12 +1,12 @@
 import { StyleSheet, View } from "react-native";
 import { Button } from "../commons/Button";
 
-export const ButtonEditProfileInfo = ({ navigation }) => {
+export const EditProfileInfo = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Button
         action={() => navigation.push("EditProfileScreen")}
-        icon={"pencil"}
+        icon={"account-edit-outline"}
         label={"Edit Profile"}
       />
     </View>

@@ -260,4 +260,138 @@ export const addNotification = async (postId, ownerId, userId) => {
   await notificationRef.set(notificationData);
 };
 
+const addFollowing = async (myUserId, followerId) => {
+  try {
+    const userDocRef = database.collection("users").doc(myUserId);
+    const userDoc = await userDocRef.get();
+
+    if (!userDoc.exists) {
+      console.error("User document does not exist");
+      return;
+    }
+
+    const following = userDoc.data().following || [];
+
+    if (following.includes(followerId)) {
+      await userDocRef.update({
+        following: firebase.firestore.FieldValue.arrayRemove(followerId),
+      });
+      await decrementStaticsCounter(myUserId, "Following");
+    } else {
+      await userDocRef.update({
+        following: firebase.firestore.FieldValue.arrayUnion(followerId),
+      });
+      await incrementStaticsCounter(myUserId, "Following");
+    }
+  } catch (error) {
+    console.error("Error updating following status:", error);
+  }
+};
+
+const addFollower = async (myUserId, followerId) => {
+  try {
+    const userDocRef = database.collection("users").doc(followerId);
+    const userDoc = await userDocRef.get();
+
+    if (!userDoc.exists) {
+      console.error("User document does not exist");
+      return;
+    }
+
+    const followers = userDoc.data().followers || [];
+
+    if (followers.includes(myUserId)) {
+      await userDocRef.update({
+        followers: firebase.firestore.FieldValue.arrayRemove(myUserId),
+      });
+      await decrementStaticsCounter(followerId, "Followers");
+    } else {
+      await userDocRef.update({
+        followers: firebase.firestore.FieldValue.arrayUnion(myUserId),
+      });
+      await incrementStaticsCounter(followerId, "Followers");
+    }
+  } catch (error) {
+    console.error("Error updating follower status:", error);
+  }
+};
+
+const incrementStaticsCounter = async (userId, label) => {
+  try {
+    const userDocRef = database.collection("users").doc(userId);
+    const userDoc = await userDocRef.get();
+
+    if (!userDoc.exists) {
+      console.error("User document does not exist");
+      return;
+    }
+
+    const statics = userDoc.data().statics || [];
+
+    const postStatics = statics.find((s) => s.label === label);
+    if (postStatics) {
+      await userDocRef.update({
+        [`statics.${statics.indexOf(postStatics)}.number`]:
+          postStatics.number + 1,
+      });
+    } else {
+      await userDocRef.update({
+        statics: firebase.firestore.FieldValue.arrayUnion({
+          label: label,
+          number: 1,
+        }),
+      });
+    }
+  } catch (error) {
+    console.error("Error incrementing statics counter:", error);
+  }
+};
+
+const decrementStaticsCounter = async (userId, label) => {
+  try {
+    const userDocRef = database.collection("users").doc(userId);
+    const userDoc = await userDocRef.get();
+
+    if (!userDoc.exists) {
+      console.error("User document does not exist");
+      return;
+    }
+
+    const statics = userDoc.data().statics || [];
+
+    const postStatics = statics.find((s) => s.label === label);
+    if (postStatics) {
+      await userDocRef.update({
+        [`statics.${statics.indexOf(postStatics)}.number`]:
+          postStatics.number - 1,
+      });
+    }
+  } catch (error) {
+    console.error("Error decrementing statics counter:", error);
+  }
+};
+
+export const updateFollowStatus = async (myUserId, followerId) => {
+  await addFollowing(myUserId, followerId);
+  await addFollower(myUserId, followerId);
+};
+
+export const isFollowing = async (myUserId, followerId) => {
+  try {
+    console.log(myUserId, followerId);
+    const userRef = database.collection("users").doc(myUserId);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      throw new Error(`User ${myUserId} does not exist`);
+    }
+
+    const following = userDoc.data().following || [];
+
+    return following.includes(followerId);
+  } catch (error) {
+    console.error("Error checking follow status:", error);
+    return false;
+  }
+};
 export default firebase;
