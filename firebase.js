@@ -221,11 +221,29 @@ export const addFireUser = async (postId, postOwnerId, userId) => {
     await postRef.update({
       fire: firebase.firestore.FieldValue.arrayUnion(userId),
     });
+    await addNotification(postId, postOwnerId, userId);
   } else {
     await postRef.update({
       fire: firebase.firestore.FieldValue.arrayRemove(userId),
     });
   }
+};
+
+export const addNotification = async (postId, ownerId, userId) => {
+  const ownerPostRef = firebase.firestore().collection("users").doc(ownerId);
+  const userData = await getUserById(userId);
+
+  const notificationData = {
+    date: moment().format(),
+    user: userData.username,
+    profilePicture: userData.profilePicture,
+    header: `${userData.username} fire your post`,
+    seen: false,
+    postId,
+  };
+
+  const notificationRef = ownerPostRef.collection("notifications").doc();
+  await notificationRef.set(notificationData);
 };
 
 export default firebase;

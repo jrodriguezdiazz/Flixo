@@ -2,11 +2,11 @@ import { StyleSheet, Text } from "react-native";
 import { Card } from "react-native-paper";
 import { theme } from "../../utils/constant";
 
-export const NoPostsFound = () => {
+export const NoPostsFound = ({ label }) => {
   const { colors } = theme;
   return (
     <Card style={styles.container}>
-      <Text style={styles.text(colors)}>Not Post Yet! 🥲</Text>
+      <Text style={styles.text(colors)}>Not {label} Yet! 🥲</Text>
     </Card>
   );
 };

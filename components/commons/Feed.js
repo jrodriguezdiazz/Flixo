@@ -4,7 +4,7 @@ import { NoPostsFound } from "../post/NotPostFound";
 import { Post } from "../post/Post";
 
 export const Feed = ({ navigation, isScrollView = true, posts }) => {
-  if (!posts.length) return <NoPostsFound />;
+  if (!posts.length) return <NoPostsFound label={"Posts"} />;
 
   const postMap = posts.map((post) => (
     <View key={post.id}>
