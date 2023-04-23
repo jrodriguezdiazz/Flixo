@@ -1,13 +1,13 @@
+import { useContext } from "react";
+import { AuthenticatedUserContext } from "../../App";
 import { EditProfileInfo } from "./EditProfileInfo";
 import { FollowButton } from "./FollowButton";
 import { Logout } from "./Logout";
 
-export const ProfileButtons = ({
-  myUserId,
-  user,
-  navigation,
-  isOwnProfile,
-}) => {
+export const ProfileButtons = ({ myUserId, user, navigation }) => {
+  const { user: myUser } = useContext(AuthenticatedUserContext);
+  const isOwnProfile = user.userId === myUser.uid;
+
   return isOwnProfile ? (
     <>
       <EditProfileInfo navigation={navigation} />
