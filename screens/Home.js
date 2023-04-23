@@ -1,9 +1,19 @@
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Feed } from "../components/commons/Feed";
-import { useAllPosts } from "../hooks/usePosts";
+import { getPosts } from "../database/post";
 
 export const HomeScreen = ({ navigation }) => {
-  const posts = useAllPosts();
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const fetchedPosts = await getPosts();
+      setPosts(fetchedPosts);
+    };
+
+    fetchPosts();
+  }, []);
 
   return (
     <View>
