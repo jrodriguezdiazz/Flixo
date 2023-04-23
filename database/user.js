@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { get, push, ref, remove, set, update } from "firebase/database";
+import { get, ref, remove, set, update } from "firebase/database";
 import { auth, database } from "./firebase";
+import { addNotification } from "./notification";
 import { getPosts } from "./post";
 
 export const createUser = async (values) => {
@@ -139,7 +140,7 @@ export const addFollower = async (userId, followerId) => {
       user: follower.username,
       header: `${user.username} started following you.`,
       profilePicture: user.profilePicture,
-      goTo: user.userId,
+      userId: user.userId,
       date: new Date().toISOString(),
       seen: false,
     });
@@ -157,14 +158,4 @@ export const removeFollower = async (userId, followerId) => {
   await remove(followerRef);
 
   console.log(`El usuario ${followerId} ya no sigue a ${userId}`);
-};
-
-export const addNotification = async (userId, notification) => {
-  try {
-    const notificationsRef = ref(database, `users/${userId}/notifications`);
-    await push(notificationsRef, notification);
-    console.log("Notificación añadida exitosamente!");
-  } catch (error) {
-    console.error("Error al añadir la notificación:", error);
-  }
 };

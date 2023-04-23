@@ -55,11 +55,13 @@ export const Navbar = ({ navigation }) => {
           name="Notification"
           component={NotificationScreen}
           options={{ tabBarLabel: "Notification" }}
+          initialParams={{ navigation }}
         />
         <Tab.Screen
           name="Messaging"
           component={MessagingScreen}
           options={{ tabBarLabel: "Messaging" }}
+          initialParams={{ navigation }}
         />
       </Tab.Navigator>
     </View>

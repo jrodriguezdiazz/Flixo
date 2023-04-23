@@ -5,13 +5,20 @@ import { theme } from "../../utils/constant";
 import { ProfilePicture } from "./ProfilePicture";
 import { RowDetails } from "./RowDetails";
 
-export const RowItem = ({ info }) => {
+export const RowItem = ({ info, navigation }) => {
   const { colors } = theme;
   return (
     <TouchableOpacity>
       <Card style={styles.cardContainer(colors, info.seen)}>
         <View style={styles.container}>
-          <ProfilePicture uri={info.profilePicture} />
+          <ProfilePicture
+            uri={info.profilePicture}
+            goTo={() =>
+              navigation.push("ProfileScreen", {
+                userId: info.userId,
+              })
+            }
+          />
           <RowDetails info={info} />
         </View>
         <Divider

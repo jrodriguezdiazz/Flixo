@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Card, Text } from "react-native-paper";
-import { formatDate } from "../../utils";
+import { getRelativeTime } from "../../utils";
 import { DEFAULT_IMAGE, theme } from "../../utils/constant";
 import { ProfilePicture } from "../commons/ProfilePicture";
 import { PostFooter } from "./PostFooter";
@@ -36,7 +36,7 @@ export const Post = ({ post, navigation }) => {
           style={styles.postDate}
           variant="bodyMedium"
         >
-          {formatDate(post.date)}
+          {getRelativeTime(post.date)}
         </Text>
       </Card.Content>
       <Card.Cover
@@ -44,7 +44,10 @@ export const Post = ({ post, navigation }) => {
         source={{ uri: post.imageURL || DEFAULT_IMAGE }}
       />
       <Card.Actions>
-        <PostFooter post={post} />
+        <PostFooter
+          navigation={navigation}
+          post={post}
+        />
       </Card.Actions>
     </Card>
   );

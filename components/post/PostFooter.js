@@ -1,17 +1,30 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { AuthenticatedUserContext } from "../../App";
-import { toggleFire } from "../../database/post";
+import { getPostStatics, toggleFire } from "../../database/post";
+import { Comments } from "../comments/Comments";
 import { Button } from "../commons/Button";
 
-export const PostFooter = ({ post }) => {
-  const numberOfComments = post?.comments?.length || 0;
-  const numberOfFire = post?.fire?.length || 0;
+export const PostFooter = ({ post, navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const {
     user: { uid },
   } = useContext(AuthenticatedUserContext);
+  const { numberOfComments, numberOfFire } = getPostStatics(
+    post.postId,
+    modalVisible
+  );
+
   const handleFireClick = async () => {
     await toggleFire(post, uid);
+  };
+
+  const handleCommentClick = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -20,7 +33,7 @@ export const PostFooter = ({ post }) => {
         <Button
           icon={"comment-multiple-outline"}
           label={`${numberOfComments} Comments`}
-          action={() => console.log("Comment")}
+          action={handleCommentClick}
         />
       </TouchableOpacity>
       <TouchableOpacity>
@@ -30,13 +43,12 @@ export const PostFooter = ({ post }) => {
           action={handleFireClick}
         />
       </TouchableOpacity>
-      <TouchableOpacity>
-        <Button
-          icon={"share"}
-          label={"Share"}
-          action={() => console.log("Share")}
-        />
-      </TouchableOpacity>
+      <Comments
+        post={post}
+        visible={modalVisible}
+        onRequestClose={closeModal}
+        navigation={navigation}
+      />
     </View>
   );
 };
@@ -45,6 +57,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
   },
 });
