@@ -1,5 +1,17 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { get, ref, remove, set, update } from "firebase/database";
+import {
+  endAt,
+  get,
+  off,
+  onValue,
+  orderByChild,
+  query,
+  ref,
+  remove,
+  set,
+  startAt,
+  update,
+} from "firebase/database";
 import { auth, database } from "./firebase";
 import { addNotification } from "./notification";
 import { getPosts } from "./post";
@@ -28,8 +40,10 @@ export const createUser = async (values) => {
       userId: user.uid,
       bio: "",
       fullName: `${firstName} ${lastName}`,
+      fullNameLowerCase: `${firstName} ${lastName}`.toLowerCase(),
       profilePicture: "DEFAULT_IMAGE",
       username,
+      usernameLowerCase: username.toLowerCase(),
       firstName,
       lastName,
       email,
@@ -158,4 +172,37 @@ export const removeFollower = async (userId, followerId) => {
   await remove(followerRef);
 
   console.log(`El usuario ${followerId} ya no sigue a ${userId}`);
+};
+
+export const searchUsers = (searchQuery, setSearchResults) => {
+  const usersRef = ref(database, "users");
+  const searchQueryLowerCase = searchQuery.toLowerCase();
+  const searchByUsername = query(
+    usersRef,
+    orderByChild("usernameLowerCase"),
+    startAt(searchQueryLowerCase),
+    endAt(searchQueryLowerCase + "\uf8ff")
+  );
+  const searchByFullName = query(
+    usersRef,
+    orderByChild("fullNameLowerCase"),
+    startAt(searchQueryLowerCase),
+    endAt(searchQueryLowerCase + "\uf8ff")
+  );
+
+  const handleSearchResult = (snapshot) => {
+    if (snapshot.exists()) {
+      setSearchResults(Object.values(snapshot.val()));
+    } else {
+      setSearchResults([]);
+    }
+  };
+
+  const usernameListener = onValue(searchByUsername, handleSearchResult);
+  const fullNameListener = onValue(searchByFullName, handleSearchResult);
+
+  return () => {
+    off(searchByUsername, usernameListener);
+    off(searchByFullName, fullNameListener);
+  };
 };

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Feed } from "../components/commons/Feed";
+import { Loading } from "../components/commons/Loading";
+import { NoResultsFound } from "../components/commons/NoResultsFound";
 import { ProfileInfo } from "../components/profile-info/ProfileInfo";
 import { findUserById } from "../database/user";
 
@@ -21,19 +23,11 @@ export const Profile = ({ navigation, route }) => {
   }, [userId]);
 
   if (loading) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <Loading />;
   }
 
   if (!user) {
-    return (
-      <View>
-        <Text>No user found with the given ID</Text>
-      </View>
-    );
+    return <NoResultsFound />;
   }
 
   return (

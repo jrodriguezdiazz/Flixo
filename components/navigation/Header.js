@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { StyleSheet, View } from "react-native";
+import { TextInput as RNPTextInput } from "react-native-paper";
 import { AuthenticatedUserContext } from "../../App";
 import { DEFAULT_IMAGE } from "../../utils/constant";
 import { ProfilePicture } from "../commons/ProfilePicture";
+import { TextInput } from "../commons/TextInput";
 
 export const Header = ({
   onChangeText = () => ({}),
@@ -25,19 +27,19 @@ export const Header = ({
         />
       </View>
 
-      {/*<View style={styles.searchInput}>*/}
-      {/*  <TextInput*/}
-      {/*    value={value}*/}
-      {/*    onChangeText={onChangeText}*/}
-      {/*    label={"Search"}*/}
-      {/*    right={<RNPTextInput.Icon icon="magnify" />}*/}
-      {/*    onFocus={() => {*/}
-      {/*      if (goToUserSearch) {*/}
-      {/*        navigation.push("UserSearchScreen");*/}
-      {/*      }*/}
-      {/*    }}*/}
-      {/*  />*/}
-      {/*</View>*/}
+      <View style={styles.searchInput}>
+        <TextInput
+          value={value}
+          onChangeText={onChangeText}
+          label={"Search"}
+          right={<RNPTextInput.Icon icon="magnify" />}
+          onFocus={() => {
+            if (goToUserSearch) {
+              navigation.push("UserSearchScreen");
+            }
+          }}
+        />
+      </View>
     </View>
   );
 };
