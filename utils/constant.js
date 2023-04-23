@@ -11,44 +11,50 @@ import { Verification } from "../screens/Verification";
 export const DEFAULT_IMAGE = "https://placehold.co/600x600/png";
 export const SCREEN_MAP = {
   defaultScreen: "LoginScreen",
-  screens: [
-    {
-      name: "HomeScreen",
-      component: Main,
-    },
-    {
-      name: "LoginScreen",
-      component: Login,
-    },
-    {
-      name: "SignUpScreen",
-      component: SignUp,
-    },
-    {
-      name: "ForgotPasswordScreen",
-      component: ForgotPassword,
-    },
-    {
-      name: "VerificationScreen",
-      component: Verification,
-    },
-    {
-      name: "NewPasswordScreen",
-      component: NewPassword,
-    },
-    {
-      name: "ProfileScreen",
-      component: Profile,
-    },
-    {
-      name: "EditProfileScreen",
-      component: EditProfile,
-    },
-    {
-      name: "UserSearchScreen",
-      component: UserSearch,
-    },
-  ],
+  authenticated: {
+    screens: [
+      {
+        name: "HomeScreen",
+        component: Main,
+      },
+      {
+        name: "ProfileScreen",
+        component: Profile,
+      },
+      {
+        name: "EditProfileScreen",
+        component: EditProfile,
+      },
+      {
+        name: "UserSearchScreen",
+        component: UserSearch,
+      },
+    ],
+  },
+  unauthenticated: {
+    screens: [
+      {
+        name: "LoginScreen",
+        component: Login,
+      },
+      {
+        name: "SignUpScreen",
+        component: SignUp,
+      },
+      {
+        name: "ForgotPasswordScreen",
+        component: ForgotPassword,
+      },
+      {
+        name: "VerificationScreen",
+        component: Verification,
+      },
+      {
+        name: "NewPasswordScreen",
+        component: NewPassword,
+      },
+    ],
+  },
 };
 export const MINIMUM_REGISTRATION_AGE = 13;
 export const VERIFICATION_CELL_COUNT = 6;
