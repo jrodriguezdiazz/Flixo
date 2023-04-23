@@ -1,17 +1,21 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { useFormikContext } from "formik";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { TextInput as RNPTextInput } from "react-native-paper";
 import { theme } from "../../utils/constant";
 import { ErrorMessage } from "../commons/ErrorMessage";
 
-export const Calendar = ({ errorMessage, value, name, ...props }) => {
-  const formikProps = useFormikContext();
+export const Calendar = ({
+  onChangeText,
+  errorMessage,
+  value,
+  name,
+  ...props
+}) => {
   const [showStartDate, setShowStartDate] = useState(false);
   const onChangeStartDate = (event, selectedDate) => {
     setShowStartDate(false);
-    formikProps.setFieldValue(name, selectedDate);
+    onChangeText(selectedDate, name);
   };
   const { colors } = theme;
   return (

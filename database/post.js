@@ -22,11 +22,6 @@ export const addPost = async (user, caption, imageURL) => {
     const postRef = push(ref(database, "posts"));
     const postId = postRef.key;
 
-    const userRef = ref(database, `users/${user.userId}`);
-    await update(userRef, {
-      numberOfPosts: increment(1),
-    });
-
     await set(postRef, {
       postId,
       userId: user.userId,
@@ -39,7 +34,10 @@ export const addPost = async (user, caption, imageURL) => {
       comments: [],
       fire: [],
     });
-
+    const userRef = ref(database, `users/${user.userId}`);
+    await update(userRef, {
+      numberOfPosts: increment(1),
+    });
     return postId;
   } catch (error) {
     console.error("Error al añadir el post:", error);

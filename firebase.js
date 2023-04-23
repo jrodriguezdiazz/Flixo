@@ -376,22 +376,4 @@ export const updateFollowStatus = async (myUserId, followerId) => {
   await addFollower(myUserId, followerId);
 };
 
-export const isFollowing = async (myUserId, followerId) => {
-  try {
-    console.log(myUserId, followerId);
-    const userRef = database.collection("users").doc(myUserId);
-    const userDoc = await userRef.get();
-
-    if (!userDoc.exists) {
-      throw new Error(`User ${myUserId} does not exist`);
-    }
-
-    const following = userDoc.data().following || [];
-
-    return following.includes(followerId);
-  } catch (error) {
-    console.error("Error checking follow status:", error);
-    return false;
-  }
-};
 export default firebase;

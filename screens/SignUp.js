@@ -91,13 +91,13 @@ export const SignUp = ({ navigation }) => {
               label="Pone Number"
               name={"phoneNumber"}
               value={userInformation.phoneNumber}
-              onChangeText={(value) => onHandleChange(value, "phoneNumber")}
+              onChangeText={onHandleChange}
             />
             <Calendar
               style={styles.calendar}
               name={"birthday"}
               value={userInformation.birthday}
-              onChangeText={(value) => onHandleChange(value, "birthday")}
+              onChangeText={onHandleChange}
             />
           </View>
           <Button

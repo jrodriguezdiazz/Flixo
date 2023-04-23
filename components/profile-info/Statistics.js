@@ -1,22 +1,21 @@
 import { StyleSheet, Text, View } from "react-native";
+import { useUserStats } from "../../database/user";
 
 export const Statistics = ({ user }) => {
-  const { followers = {}, following = {}, numberOfPosts = 0 } = user;
-  const numberOfFollowers = Object.keys(followers).length;
-  const numberOfFollowing = Object.keys(following).length;
+  const stats = useUserStats(user.userId);
 
   return (
     <View style={styles.container}>
       <View style={styles.static}>
-        <Text>{numberOfPosts}</Text>
+        <Text>{stats.numberOfPosts}</Text>
         <Text>Posts</Text>
       </View>
       <View style={styles.static}>
-        <Text>{numberOfFollowers}</Text>
+        <Text>{stats.numberOfFollowers}</Text>
         <Text>Followers</Text>
       </View>
       <View style={styles.static}>
-        <Text>{numberOfFollowing}</Text>
+        <Text>{stats.numberOfFollowing}</Text>
         <Text>Following</Text>
       </View>
     </View>

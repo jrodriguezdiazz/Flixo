@@ -4,7 +4,7 @@ import { EditProfileInfo } from "./EditProfileInfo";
 import { FollowButton } from "./FollowButton";
 import { Logout } from "./Logout";
 
-export const ProfileButtons = ({ myUserId, user, navigation }) => {
+export const ProfileButtons = ({ user, navigation }) => {
   const { user: myUser } = useContext(AuthenticatedUserContext);
   const isOwnProfile = user.userId === myUser.uid;
 
@@ -16,7 +16,7 @@ export const ProfileButtons = ({ myUserId, user, navigation }) => {
   ) : (
     <FollowButton
       user={user}
-      myUserId={myUserId}
+      myUserId={myUser.uid}
     />
   );
 };

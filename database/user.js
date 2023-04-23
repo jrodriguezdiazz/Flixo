@@ -12,6 +12,7 @@ import {
   startAt,
   update,
 } from "firebase/database";
+import { useEffect, useState } from "react";
 import { auth, database } from "./firebase";
 import { addNotification } from "./notification";
 import { getPosts } from "./post";
@@ -172,6 +173,61 @@ export const removeFollower = async (userId, followerId) => {
   await remove(followerRef);
 
   console.log(`El usuario ${followerId} ya no sigue a ${userId}`);
+};
+
+export const checkIfIsFollowing = async (myUserId, followerId) => {
+  try {
+    const followingRef = ref(database, `users/${myUserId}/following`);
+    const followingSnapshot = await get(followingRef);
+
+    if (followingSnapshot.exists()) {
+      const followingList = followingSnapshot.val();
+      for (const key in followingList) {
+        if (followingList[key].userId === followerId) {
+          return { isFollowing: true, key };
+        }
+      }
+    }
+    return { isFollowing: false, key: null };
+  } catch (error) {
+    console.error("Error al verificar si el usuario sigue a otro:", error);
+    return { isFollowing: false, key: null };
+  }
+};
+
+export const useUserStats = (userId) => {
+  const [stats, setStats] = useState({
+    numberOfPosts: 0,
+    numberOfFollowers: 0,
+    numberOfFollowing: 0,
+  });
+
+  useEffect(() => {
+    const userRef = ref(database, `users/${userId}`);
+
+    const handleUserUpdate = (snapshot) => {
+      if (snapshot.exists()) {
+        const {
+          numberOfPosts = 0,
+          followers = {},
+          following = {},
+        } = snapshot.val();
+        setStats({
+          numberOfPosts,
+          numberOfFollowers: Object.keys(followers).length,
+          numberOfFollowing: Object.keys(following).length,
+        });
+      }
+    };
+
+    const userListener = onValue(userRef, handleUserUpdate);
+
+    return () => {
+      off(userRef, "value", userListener);
+    };
+  }, [userId]);
+
+  return stats;
 };
 
 export const searchUsers = (searchQuery, setSearchResults) => {
