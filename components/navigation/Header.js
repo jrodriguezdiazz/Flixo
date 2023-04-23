@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { TextInput as RNPTextInput } from "react-native-paper";
 import { AuthenticatedUserContext } from "../../App";
+import { findUserById } from "../../database/user";
 import { DEFAULT_IMAGE } from "../../utils/constant";
 import { ProfilePicture } from "../commons/ProfilePicture";
 import { TextInput } from "../commons/TextInput";
@@ -12,7 +13,21 @@ export const Header = ({
   goToUserSearch = true,
   value = "",
 }) => {
-  const { user } = useContext(AuthenticatedUserContext);
+  const {
+    user: { uid },
+  } = useContext(AuthenticatedUserContext);
+  const [currentUser, setCurrentUser] = useState({
+    profilePicture: DEFAULT_IMAGE,
+  });
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      const fetchedUser = await findUserById(uid);
+      setCurrentUser(fetchedUser);
+    };
+
+    fetchCurrentUser();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -20,10 +35,10 @@ export const Header = ({
         <ProfilePicture
           goTo={() =>
             navigation.push("ProfileScreen", {
-              userId: user.uid,
+              userId: uid,
             })
           }
-          uri={user?.profilePicture || DEFAULT_IMAGE}
+          uri={currentUser.profilePicture || DEFAULT_IMAGE}
         />
       </View>
 

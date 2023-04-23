@@ -5,7 +5,6 @@ import { ProfilePicture } from "../commons/ProfilePicture";
 import { NoPostsFound } from "../post/NotPostFound";
 
 export const UserList = ({ userList, navigation }) => {
-  console.log(userList);
   if (!userList.length) return <NoPostsFound label={"Users"} />;
   const renderUser = ({ item }) => {
     return (

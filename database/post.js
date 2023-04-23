@@ -183,8 +183,7 @@ export const getPosts = async (userId = null) => {
     if (postsSnapshot.exists()) {
       return postsSnapshot.val();
     } else {
-      console.log("No se encontraron posts");
-      return {};
+      return null;
     }
   } catch (error) {
     console.error("Error al buscar posts:", error);
