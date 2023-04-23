@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { addFireUser } from "../../firebase";
-import { useAuthStore } from "../../stores/useAuthStore";
+import { AuthenticatedUserContext } from "../../App";
+import { toggleFire } from "../../database/post";
 import { Button } from "../commons/Button";
 
 export const PostFooter = ({ post }) => {
-  const { user } = useAuthStore();
-  const numberOfComments = post?.comments.length || 0;
-  const numberOfFire = post?.fire.length || 0;
+  const numberOfComments = post?.comments?.length || 0;
+  const numberOfFire = post?.fire?.length || 0;
+  const {
+    user: { uid },
+  } = useContext(AuthenticatedUserContext);
   const handleFireClick = async () => {
-    await addFireUser(post.id, post.userId, user.userId);
+    await toggleFire(post, uid);
   };
 
   return (

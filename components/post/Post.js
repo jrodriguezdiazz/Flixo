@@ -6,7 +6,6 @@ import { ProfilePicture } from "../commons/ProfilePicture";
 import { PostFooter } from "./PostFooter";
 
 export const Post = ({ post, navigation }) => {
-  // console.log(post);
   const { colors } = theme;
   return (
     <Card style={styles.container}>
