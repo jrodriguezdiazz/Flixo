@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   Alert,
   SafeAreaView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -52,31 +53,56 @@ export const Login = ({ navigation }) => {
           action={onHandleLogin}
         />
 
-        <View
-          style={{
-            marginTop: 20,
-            flexDirection: "row",
-            alignItems: "center",
-            alignSelf: "center",
-          }}
-        >
-          <Text style={{ color: "gray", fontWeight: "600", fontSize: 14 }}>
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            Don't have an account?
-          </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
-            <Text
-              style={{
-                color: theme.colors.sunflower,
-                fontWeight: "600",
-                fontSize: 14,
-              }}
-            >
-              Sign Up
+        <View style={styles.container}>
+          <View>
+            <Text style={{ color: "gray", fontWeight: "600", fontSize: 14 }}>
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              Don't have an account?
             </Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("SignUpScreen")}
+            >
+              <Text
+                style={{
+                  color: theme.colors.sunflower,
+                  fontWeight: "600",
+                  fontSize: 14,
+                }}
+              >
+                Sign Up
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={{ color: "gray", fontWeight: "600", fontSize: 14 }}>
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              Did you forget your password?{" "}
+            </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ForgotPasswordScreen")}
+            >
+              <Text
+                style={{
+                  color: theme.colors.sunflower,
+                  fontWeight: "600",
+                  fontSize: 14,
+                }}
+              >
+                Reset
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </SafeAreaView>
     </LayoutForm>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+});
