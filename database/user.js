@@ -287,3 +287,13 @@ export const getUserChats = async (userId) => {
     return [];
   }
 };
+
+export const watchUserUpdates = (userId, onUserUpdate) => {
+  const userRef = ref(database, `users/${userId}`);
+  const unsubscribe = onValue(userRef, (snapshot) => {
+    const updatedUser = snapshot.val();
+    onUserUpdate(updatedUser);
+  });
+
+  return unsubscribe;
+};
