@@ -1,14 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, TouchableWithoutFeedback, View, } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { ListItem, SearchBar } from "react-native-elements";
 import { Card } from "react-native-paper";
 import { AuthenticatedUserContext } from "../App";
 import { ProfilePicture } from "../components/commons/ProfilePicture";
 import { getUserChats, searchUsers } from "../database/user";
 
-export const ChatList = ({navigation}) => {
+export const ChatList = ({ navigation }) => {
   const {
-    user: {uid},
+    user: { uid },
   } = useContext(AuthenticatedUserContext);
   const [chats, setChats] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,14 +29,14 @@ export const ChatList = ({navigation}) => {
     fetchChats();
   }, [uid]);
 
-  const renderChat = ({item}) => (
+  const renderChat = ({ item }) => (
     <ListItem
-      onPress={ () => navigation.navigate("Chat", {chat: item, uid}) }
-      key={ item.id }
-      leftAvatar={ {source: {uri: item.user.profilePicture}} }
-      title={ item.user.username }
-      subtitle={ item.lastMessage.text }
-      rightSubtitle={ item.lastMessage.createdAt }
+      onPress={() => navigation.navigate("Chat", { chat: item, uid })}
+      key={item.id}
+      leftAvatar={{ source: { uri: item.user.profilePicture } }}
+      title={item.user.username}
+      subtitle={item.lastMessage.text}
+      rightSubtitle={item.lastMessage.createdAt}
       bottomDivider
     />
   );
@@ -50,18 +56,16 @@ export const ChatList = ({navigation}) => {
     // Luego navega a la pantalla del chat.
   };
 
-  const renderSearchResult = ({item}) => {
+  const renderSearchResult = ({ item }) => {
     console.log(item);
     return (
-      <TouchableWithoutFeedback
-        onPress={ () => navigation.navigate("ChatScreen", {user}) }
-        }>
+      <TouchableWithoutFeedback>
         <Card>
           <Card.Title
-            style={ styles.item }
-            title={ item.fullName }
-            subtitle={ "@" + item.username }
-            left={ () => <ProfilePicture uri={ item.profilePicture } /> }
+            style={styles.item}
+            title={item.fullName}
+            subtitle={"@" + item.username}
+            left={() => <ProfilePicture uri={item.profilePicture} />}
           />
         </Card>
       </TouchableWithoutFeedback>
@@ -69,28 +73,28 @@ export const ChatList = ({navigation}) => {
   };
 
   return (
-    <View style={ styles.container }>
+    <View style={styles.container}>
       <SearchBar
         placeholder="Search user..."
-        onChangeText={ searchUser }
-        value={ searchQuery }
+        onChangeText={searchUser}
+        value={searchQuery}
       />
-      { searchQuery ? (
+      {searchQuery ? (
         <FlatList
-          data={ searchResults }
-          renderItem={ renderSearchResult }
-          keyExtractor={ (item) => item.id }
+          data={searchResults}
+          renderItem={renderSearchResult}
+          keyExtractor={(item) => item.id}
         />
       ) : (
         <FlatList
-          data={ chats }
-          renderItem={ renderChat }
-          keyExtractor={ (item) => item.id }
+          data={chats}
+          renderItem={renderChat}
+          keyExtractor={(item) => item.id}
           ListEmptyComponent={
-            <Text style={ styles.emptyText }>No hay chats disponibles.</Text>
+            <Text style={styles.emptyText}>No hay chats disponibles.</Text>
           }
         />
-      ) }
+      )}
     </View>
   );
 };
