@@ -1,3 +1,4 @@
+import { Chat } from "../screens/Chat";
 import { EditProfile } from "../screens/EditProfile";
 import { ForgotPassword } from "../screens/ForgotPassword";
 import { Login } from "../screens/Login";
@@ -28,6 +29,10 @@ export const SCREEN_MAP = {
       {
         name: "UserSearchScreen",
         component: UserSearch,
+      },
+      {
+        name: "ChatScreen",
+        component: Chat,
       },
     ],
   },

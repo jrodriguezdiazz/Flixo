@@ -262,3 +262,28 @@ export const searchUsers = (searchQuery, setSearchResults) => {
     off(searchByFullName, fullNameListener);
   };
 };
+
+export const getUserChats = async (userId) => {
+  try {
+    const chatsRef = ref(database, `chats/${userId}`);
+    const chatsSnapshot = await get(chatsRef);
+
+    if (chatsSnapshot.exists()) {
+      const chatData = chatsSnapshot.val();
+      const chatsArray = Object.keys(chatData).map((key) => {
+        return {
+          id: key,
+          user: chatData[key].user,
+          lastMessage: chatData[key].lastMessage,
+        };
+      });
+
+      return chatsArray;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.error("Error al obtener los chats del usuario:", error);
+    return [];
+  }
+};
