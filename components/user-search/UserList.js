@@ -5,7 +5,12 @@ import { ProfilePicture } from "../commons/ProfilePicture";
 import { NoPostsFound } from "../post/NotPostFound";
 
 export const UserList = ({ userList, navigation }) => {
-  if (!userList.length) return <NoPostsFound label={"Users"} />;
+  if (!userList.length)
+    return (
+      <NoPostsFound
+        message={"Unfortunately we have not found any users... 😞"}
+      />
+    );
   const renderUser = ({ item }) => {
     return (
       <TouchableWithoutFeedback

@@ -1,25 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { View } from "react-native";
+import { AuthenticatedUserContext } from "../App";
 import { Feed } from "../components/commons/Feed";
-import { getPosts } from "../database/post";
+import { useFollowingPosts } from "../database/post";
 
 export const HomeScreen = ({ navigation }) => {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const fetchedPosts = await getPosts();
-      setPosts(fetchedPosts);
-    };
-
-    fetchPosts();
-  }, []);
+  const { user } = useContext(AuthenticatedUserContext);
+  const posts = useFollowingPosts(user.uid);
 
   return (
     <View>
       <Feed
         posts={posts}
         navigation={navigation}
+        message={
+          "Unfortunately we have not found any post, try following some friends... 🤙🏾"
+        }
       />
     </View>
   );

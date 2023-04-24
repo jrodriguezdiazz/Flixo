@@ -3,8 +3,8 @@ import { Divider } from "react-native-elements";
 import { NoPostsFound } from "../post/NotPostFound";
 import { Post } from "../post/Post";
 
-export const Feed = ({ navigation, isScrollView = true, posts }) => {
-  if (!posts) return <NoPostsFound label={"Posts"} />;
+export const Feed = ({ message, navigation, isScrollView = true, posts }) => {
+  if (!posts) return <NoPostsFound message={message} />;
 
   const postMap = Object.values(posts).map((post) => (
     <View key={post.postId}>

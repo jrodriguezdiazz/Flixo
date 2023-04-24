@@ -38,6 +38,7 @@ export const Profile = ({ navigation, route }) => {
           user={user}
         />
         <Feed
+          message={"You haven't posted anything YET... 🥲"}
           posts={user.posts}
           isScrollView={false}
           navigation={navigation}

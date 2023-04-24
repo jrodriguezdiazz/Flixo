@@ -190,3 +190,36 @@ export const getPosts = async (userId = null) => {
     return {};
   }
 };
+
+export const useFollowingPosts = (userId) => {
+  const [posts, setPosts] = useState(null);
+
+  useEffect(() => {
+    const followingRef = ref(database, `users/${userId}/following`);
+    const handleFollowingUpdate = async (snapshot) => {
+      if (snapshot.exists()) {
+        const followingIds = Object.keys(snapshot.val());
+        console.log(followingIds);
+        if (followingIds.length > 0) {
+          const followingPosts = await Promise.all(
+            followingIds.map((id) => getPosts(id))
+          );
+          const combinedPosts = Object.assign({}, ...followingPosts);
+          setPosts(combinedPosts);
+        } else {
+          setPosts(null);
+        }
+      } else {
+        setPosts(null);
+      }
+    };
+
+    const followingListener = onValue(followingRef, handleFollowingUpdate);
+
+    return () => {
+      off(followingRef, "value", followingListener);
+    };
+  }, [userId]);
+
+  return posts;
+};

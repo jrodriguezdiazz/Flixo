@@ -22,7 +22,8 @@ export const NotificationScreen = ({ navigation }) => {
     };
   }, [user]);
 
-  if (!notifications.length) return <NoPostsFound label={"Notifications"} />;
+  if (!notifications.length)
+    return <NoPostsFound message={"So far you have no notification 🧹"} />;
 
   return (
     <View>
