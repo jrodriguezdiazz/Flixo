@@ -29,7 +29,7 @@ export const Login = ({ navigation }) => {
     <LayoutForm>
       <SafeAreaView>
         <TextInput
-          placeholder="Enter emal"
+          placeholder="Enter email"
           autoCapitalize="none"
           keyboardType="email-address"
           textContentType="emailAddress"
