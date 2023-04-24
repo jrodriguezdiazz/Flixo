@@ -1,5 +1,6 @@
-import { Formik } from "formik";
+import { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { updateUser } from "../../database/user";
 import { Button } from "../commons/Button";
 import { Calendar } from "../commons/Calendar";
 import { TextInput } from "../commons/TextInput";
@@ -7,116 +8,101 @@ import { TextInputPhoneNumber } from "../commons/TextInputPhoneNumber";
 import { RowInfo } from "./RowInfo";
 import { SectionInfo } from "./SectionInfo";
 
-export const CommonInfo = ({ user, updateUser }) => {
-  const handleFormSubmit = async (values) => {
+export const CommonInfo = ({ user }) => {
+  const [values, setValues] = useState({
+    username: user.username,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    bio: user.bio,
+    email: user.email,
+    phoneNumber: user.phoneNumber.slice(4),
+    birthday: new Date(user.birthday),
+  });
+
+  const handleFormSubmit = async () => {
     try {
-      await updateUser({ ...values, id: user.userId });
-      alert("User info updated successfully!");
+      await updateUser(user.userId, values);
     } catch (error) {
       alert(`Error updating user info: ${error.message}`);
     }
   };
 
+  const onHandleChange = (value, field) => {
+    setValues((prevState) => ({
+      ...prevState,
+      [field]: value,
+    }));
+  };
+
+  console.log(values);
+
   return (
     <View style={styles.container}>
-      <Formik
-        initialValues={{
-          username: user.username,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          bio: user.bio,
-          email: user.email,
-          phone: user.phone,
-          birthday: new Date(user.birthday),
-        }}
-        onSubmit={handleFormSubmit}
-        validate={(values) => {
-          const errors = {};
-          if (!values.name) {
-            errors.name = "Required";
-          }
-          if (!values.username) {
-            errors.username = "Required";
-          }
-          return errors;
-        }}
-      >
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <>
-            <SectionInfo title={"Common Info"}>
-              <RowInfo label={"Username"}>
-                <TextInput
-                  style={styles.textInput}
-                  name={"username"}
-                  onChangeText={handleChange("username")}
-                  onBlur={handleBlur("username")}
-                  value={values.username}
-                />
-              </RowInfo>
-              <RowInfo label={"First Name"}>
-                <TextInput
-                  style={styles.textInput}
-                  onChangeText={handleChange("firstName")}
-                  onBlur={handleBlur("firstName")}
-                  value={values.firstName}
-                />
-              </RowInfo>
-              <RowInfo label={"last Name"}>
-                <TextInput
-                  style={styles.textInput}
-                  onChangeText={handleChange("lastName")}
-                  onBlur={handleBlur("lastName")}
-                  value={values.lastName}
-                />
-              </RowInfo>
-              <RowInfo label={"Bio"}>
-                <TextInput
-                  style={styles.textInput}
-                  onChangeText={handleChange("bio")}
-                  onBlur={handleBlur("bio")}
-                  value={values.bio}
-                />
-              </RowInfo>
-            </SectionInfo>
-            <SectionInfo title={"Private Information"}>
-              <RowInfo label={"Email"}>
-                <TextInput
-                  style={styles.textInput}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  value={values.email}
-                />
-              </RowInfo>
-              <RowInfo label={"Phone"}>
-                <TextInputPhoneNumber
-                  style={styles.textInput}
-                  label="Phone Number"
-                  name={"phone"}
-                  onChangeText={handleChange("phone")}
-                  onBlur={handleBlur("phone")}
-                  value={user.phone}
-                  disabled
-                />
-              </RowInfo>
-              <RowInfo label={"Birthday"}>
-                <Calendar
-                  style={styles.textInput}
-                  name={"birthday"}
-                  onChangeText={handleChange("birthday")}
-                  onBlur={handleBlur("birthday")}
-                  value={user.birthday}
-                />
-              </RowInfo>
-            </SectionInfo>
-            <View style={styles.button}>
-              <Button
-                label={"Update"}
-                onPress={handleSubmit}
-              />
-            </View>
-          </>
-        )}
-      </Formik>
+      <SectionInfo title={"Common Info"}>
+        <RowInfo label={"Username"}>
+          <TextInput
+            style={styles.textInput}
+            name={"username"}
+            onChangeText={(value) => onHandleChange(value, "username")}
+            value={values.username}
+          />
+        </RowInfo>
+        <RowInfo label={"First Name"}>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(value) => onHandleChange(value, "firstName")}
+            value={values.firstName}
+          />
+        </RowInfo>
+        <RowInfo label={"last Name"}>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(value) => onHandleChange(value, "lastName")}
+            value={values.lastName}
+          />
+        </RowInfo>
+        <RowInfo label={"Bio"}>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(value) => onHandleChange(value, "bio")}
+            value={values.bio}
+          />
+        </RowInfo>
+      </SectionInfo>
+      <SectionInfo title={"Private Information"}>
+        <RowInfo label={"Birthday"}>
+          <Calendar
+            style={styles.textInput}
+            name={"birthday"}
+            onChangeText={onHandleChange}
+            value={new Date(user.birthday)}
+          />
+        </RowInfo>
+        <RowInfo label={"Email"}>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(value) => onHandleChange(value, "email")}
+            value={values.email}
+            disabled
+          />
+        </RowInfo>
+        <RowInfo label={"Phone"}>
+          <TextInputPhoneNumber
+            style={styles.textInput}
+            label="Phone Number"
+            name={"phoneNumber"}
+            onChangeText={onHandleChange}
+            value={user.phoneNumber}
+            disabled
+          />
+        </RowInfo>
+      </SectionInfo>
+      <View style={styles.button}>
+        <Button
+          label={"Update"}
+          onPress={handleFormSubmit}
+        />
+      </View>
     </View>
   );
 };

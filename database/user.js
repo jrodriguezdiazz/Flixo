@@ -62,8 +62,8 @@ export const createUser = async (values) => {
 export const updateUser = async (userId, updatedUserData) => {
   try {
     const userRef = ref(database, `users/${userId}`);
+    await update(userRef, updatedUserData);
     console.log("updateUser ✅");
-    return update(userRef, updatedUserData);
   } catch (error) {
     console.error("Error al actualizar los datos del usuario:", error);
   }

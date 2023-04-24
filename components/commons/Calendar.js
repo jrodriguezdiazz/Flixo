@@ -17,7 +17,9 @@ export const Calendar = ({
     setShowStartDate(false);
     onChangeText(selectedDate, name);
   };
+
   const { colors } = theme;
+
   return (
     <View style={styles.container}>
       <RNPTextInput
