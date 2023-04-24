@@ -4,9 +4,10 @@ import { NoPostsFound } from "../post/NotPostFound";
 import { Post } from "../post/Post";
 
 export const Feed = ({ message, navigation, isScrollView = true, posts }) => {
-  if (!posts) return <NoPostsFound message={message} />;
+  const postArray = Object.values(posts);
+  if (!postArray.length) return <NoPostsFound message={message} />;
 
-  const postMap = Object.values(posts).map((post) => (
+  const postMap = postArray.map((post) => (
     <View key={post.postId}>
       <Post
         post={post}

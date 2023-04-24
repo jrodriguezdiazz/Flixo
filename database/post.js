@@ -192,25 +192,25 @@ export const getPosts = async (userId = null) => {
 };
 
 export const useFollowingPosts = (userId) => {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState({});
 
   useEffect(() => {
     const followingRef = ref(database, `users/${userId}/following`);
     const handleFollowingUpdate = async (snapshot) => {
+      let followingIds = [];
       if (snapshot.exists()) {
-        const followingIds = Object.keys(snapshot.val());
-        console.log(followingIds);
-        if (followingIds.length > 0) {
-          const followingPosts = await Promise.all(
-            followingIds.map((id) => getPosts(id))
-          );
-          const combinedPosts = Object.assign({}, ...followingPosts);
-          setPosts(combinedPosts);
-        } else {
-          setPosts(null);
-        }
+        followingIds = Object.keys(snapshot.val());
+      }
+      followingIds.push(userId);
+
+      if (followingIds.length > 0) {
+        const followingPosts = await Promise.all(
+          followingIds.map((id) => getPosts(id))
+        );
+        const combinedPosts = Object.assign({}, ...followingPosts);
+        setPosts(combinedPosts);
       } else {
-        setPosts(null);
+        setPosts({});
       }
     };
 
