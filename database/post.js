@@ -175,15 +175,26 @@ export const getPosts = async (userId = null) => {
     if (userId) {
       postsQuery = query(postsRef, orderByChild("userId"), equalTo(userId));
     } else {
-      postsQuery = postsRef;
+      postsQuery = query(postsRef, orderByChild("date"));
     }
 
     const postsSnapshot = await get(postsQuery);
 
     if (postsSnapshot.exists()) {
-      return postsSnapshot.val();
+      const posts = postsSnapshot.val();
+      const sortedPosts = Object.values(posts).sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+
+      // Convert the array back to an object
+      const sortedPostsObject = sortedPosts.reduce((acc, post) => {
+        acc[post.postId] = post;
+        return acc;
+      }, {});
+
+      return sortedPostsObject;
     } else {
-      return null;
+      return {};
     }
   } catch (error) {
     console.error("Error al buscar posts:", error);
@@ -208,7 +219,19 @@ export const useFollowingPosts = (userId) => {
           followingIds.map((id) => getPosts(id))
         );
         const combinedPosts = Object.assign({}, ...followingPosts);
-        setPosts(combinedPosts);
+        const postsArray = Object.values(combinedPosts);
+        postsArray.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return dateB - dateA;
+        });
+
+        const sortedPosts = postsArray.reduce((accumulator, post) => {
+          accumulator[post.postId] = post;
+          return accumulator;
+        }, {});
+
+        setPosts(sortedPosts);
       } else {
         setPosts({});
       }
