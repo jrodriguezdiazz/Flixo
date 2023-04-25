@@ -61,8 +61,16 @@ export const createUser = async (values) => {
 
 export const updateUser = async (userId, updatedUserData) => {
   try {
+    const fullName = `${updatedUserData.firstName} ${updatedUserData.lastName}`;
+    const fullNameLowerCase = fullName.toLowerCase();
+    const usernameLowerCase = updatedUserData.username.toLowerCase();
     const userRef = ref(database, `users/${userId}`);
-    await update(userRef, updatedUserData);
+    await update(userRef, {
+      ...updatedUserData,
+      fullName,
+      fullNameLowerCase,
+      usernameLowerCase,
+    });
     console.log("updateUser ✅");
   } catch (error) {
     console.error("Error al actualizar los datos del usuario:", error);

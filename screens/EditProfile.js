@@ -9,7 +9,7 @@ import { ChangeProfilePhoto } from "../components/edit-info/ChangeProfilePhoto";
 import { CommonInfo } from "../components/edit-info/CommonInfo";
 import { findUserById } from "../database/user";
 
-export const EditProfile = () => {
+export const EditProfile = ({ navigation }) => {
   const {
     user: { uid },
   } = useContext(AuthenticatedUserContext);
@@ -44,7 +44,10 @@ export const EditProfile = () => {
             uri={user.profilePicture}
           />
           <ChangeProfilePhoto />
-          <CommonInfo user={user} />
+          <CommonInfo
+            user={user}
+            navigation={navigation}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

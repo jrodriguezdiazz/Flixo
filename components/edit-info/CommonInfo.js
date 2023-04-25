@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { Formik } from "formik";
 import { StyleSheet, View } from "react-native";
+import * as Yup from "yup";
 import { updateUser } from "../../database/user";
 import { Button } from "../commons/Button";
 import { Calendar } from "../commons/Calendar";
@@ -8,8 +9,25 @@ import { TextInputPhoneNumber } from "../commons/TextInputPhoneNumber";
 import { RowInfo } from "./RowInfo";
 import { SectionInfo } from "./SectionInfo";
 
-export const CommonInfo = ({ user }) => {
-  const [values, setValues] = useState({
+const CommonInfoSchema = Yup.object().shape({
+  username: Yup.string()
+    .required("Username is required")
+    .min(4, "Username must be at least 4 characters")
+    .max(20, "Username must be at most 20 characters"),
+  firstName: Yup.string()
+    .required("First name is required")
+    .max(50, "First name must be at most 50 characters"),
+  lastName: Yup.string()
+    .required("Last name is required")
+    .max(50, "Last name must be at most 50 characters"),
+  bio: Yup.string().max(200, "Bio must be at most 200 characters"),
+  birthday: Yup.date()
+    .required("Birthday is required")
+    .max(new Date(), "Invalid birthday"),
+});
+
+export const CommonInfo = ({ user, navigation }) => {
+  const initialValues = {
     username: user.username,
     firstName: user.firstName,
     lastName: user.lastName,
@@ -17,93 +35,118 @@ export const CommonInfo = ({ user }) => {
     email: user.email,
     phoneNumber: user.phoneNumber.slice(4),
     birthday: new Date(user.birthday),
-  });
+  };
 
-  const handleFormSubmit = async () => {
+  const handleFormSubmit = async (values, { resetForm }) => {
     try {
       await updateUser(user.userId, values);
+      resetForm();
+      navigation.navigate("ProfileScreen", {
+        userId: user.userId,
+      });
     } catch (error) {
       alert(`Error updating user info: ${error.message}`);
     }
   };
 
-  const onHandleChange = (value, field) => {
-    setValues((prevState) => ({
-      ...prevState,
-      [field]: value,
-    }));
-  };
-
-  console.log(values);
-
   return (
-    <View style={styles.container}>
-      <SectionInfo title={"Common Info"}>
-        <RowInfo label={"Username"}>
-          <TextInput
-            style={styles.textInput}
-            name={"username"}
-            onChangeText={(value) => onHandleChange(value, "username")}
-            value={values.username}
-          />
-        </RowInfo>
-        <RowInfo label={"First Name"}>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(value) => onHandleChange(value, "firstName")}
-            value={values.firstName}
-          />
-        </RowInfo>
-        <RowInfo label={"last Name"}>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(value) => onHandleChange(value, "lastName")}
-            value={values.lastName}
-          />
-        </RowInfo>
-        <RowInfo label={"Bio"}>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(value) => onHandleChange(value, "bio")}
-            value={values.bio}
-          />
-        </RowInfo>
-      </SectionInfo>
-      <SectionInfo title={"Private Information"}>
-        <RowInfo label={"Birthday"}>
-          <Calendar
-            style={styles.textInput}
-            name={"birthday"}
-            onChangeText={onHandleChange}
-            value={new Date(user.birthday)}
-          />
-        </RowInfo>
-        <RowInfo label={"Email"}>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(value) => onHandleChange(value, "email")}
-            value={values.email}
-            disabled
-          />
-        </RowInfo>
-        <RowInfo label={"Phone"}>
-          <TextInputPhoneNumber
-            style={styles.textInput}
-            label="Phone Number"
-            name={"phoneNumber"}
-            onChangeText={onHandleChange}
-            value={user.phoneNumber}
-            disabled
-          />
-        </RowInfo>
-      </SectionInfo>
-      <View style={styles.button}>
-        <Button
-          label={"Update"}
-          onPress={handleFormSubmit}
-        />
-      </View>
-    </View>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleFormSubmit}
+      validationSchema={CommonInfoSchema}
+    >
+      {({
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        values,
+        errors,
+        touched,
+      }) => (
+        <View style={styles.container}>
+          <SectionInfo title={"Common Info"}>
+            <RowInfo label={"Username"}>
+              <TextInput
+                style={styles.textInput}
+                autofocus={true}
+                name="username"
+                value={values.username}
+                onChangeText={handleChange("username")}
+                onBlur={handleBlur("username")}
+                error={touched.username && errors.username}
+              />
+            </RowInfo>
+            <RowInfo label={"First Name"}>
+              <TextInput
+                style={styles.textInput}
+                name="firstName"
+                value={values.firstName}
+                onChangeText={handleChange("firstName")}
+                onBlur={handleBlur("firstName")}
+                error={touched.firstName && errors.firstName}
+              />
+            </RowInfo>
+            <RowInfo label={"Last Name"}>
+              <TextInput
+                style={styles.textInput}
+                name="lastName"
+                value={values.lastName}
+                onChangeText={handleChange("lastName")}
+                onBlur={handleBlur("lastName")}
+                error={touched.lastName && errors.lastName}
+              />
+            </RowInfo>
+            <RowInfo label={"Bio"}>
+              <TextInput
+                style={styles.textInput}
+                name="bio"
+                value={values.bio}
+                onChangeText={handleChange("bio")}
+                onBlur={handleBlur("bio")}
+                error={touched.bio && errors.bio}
+              />
+            </RowInfo>
+          </SectionInfo>
+          <SectionInfo title={"Private Information"}>
+            <RowInfo label={"Birthday"}>
+              <Calendar
+                style={styles.textInput}
+                name="birthday"
+                value={values.birthday}
+                onChangeText={handleChange("birthday")}
+                onBlur={handleBlur("birthday")}
+                error={touched.birthday && errors.birthday}
+              />
+            </RowInfo>
+            <RowInfo label={"Email"}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={handleChange("email")}
+                value={values.email}
+                disabled
+              />
+            </RowInfo>
+            <RowInfo label={"Phone"}>
+              <TextInputPhoneNumber
+                style={styles.textInput}
+                name="phoneNumber"
+                value={values.phoneNumber}
+                onChangeText={handleChange("phoneNumber")}
+                onBlur={handleBlur("phoneNumber")}
+                error={touched.phoneNumber && errors.phoneNumber}
+                disabled
+              />
+            </RowInfo>
+          </SectionInfo>
+          <View style={styles.button}>
+            <Button
+              label={"Update"}
+              onPress={handleSubmit}
+            />
+          </View>
+        </View>
+      )}
+    </Formik>
   );
 };
 
