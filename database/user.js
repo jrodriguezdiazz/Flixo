@@ -181,11 +181,11 @@ export const checkIfIsFollowing = async (myUserId, followerId) => {
     const followingSnapshot = await get(followingRef);
 
     if (followingSnapshot.exists()) {
-      const followingList = followingSnapshot.val();
-      for (const key in followingList) {
-        if (followingList[key].userId === followerId) {
-          return { isFollowing: true, key };
-        }
+      const followingList = Object.keys(followingSnapshot.val());
+      if (followingList.includes(followerId)) {
+        return { isFollowing: true, key: followerId };
+      } else {
+        return { isFollowing: false, key: null };
       }
     }
     return { isFollowing: false, key: null };
