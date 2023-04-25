@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { Formik } from "formik";
+import React from "react";
 import {
   Alert,
   SafeAreaView,
@@ -14,97 +15,115 @@ import { LayoutForm } from "../components/commons/LayoutForm";
 import { TextInput } from "../components/commons/TextInput";
 import { TextInputPhoneNumber } from "../components/commons/TextInputPhoneNumber";
 import { createUser } from "../database/user";
+import { signUpSchema } from "../schema/signUp";
 import { getMinimumRegistrationAge } from "../utils";
 import { theme } from "../utils/constant";
 
 export const SignUp = ({ navigation }) => {
-  const [userInformation, setUserInformation] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    birthDate: "",
-    username: "",
-    phoneNumber: "",
-    birthday: getMinimumRegistrationAge(),
-  });
-
-  const onHandleSignup = () => {
-    const { email, password } = userInformation;
-    if (email !== "" && password !== "") {
-      createUser(userInformation)
-        .then(() => console.log("Signup success"))
-        .catch((err) => {
-          console.log(err);
-          Alert.alert("Login error", err.message);
-        });
+  const onHandleSignup = async (values) => {
+    try {
+      await createUser(values);
+      console.log("Signup success");
+    } catch (err) {
+      console.log(err);
+      Alert.alert("Login error", err.message);
     }
-  };
-
-  const onHandleChange = (value, field) => {
-    setUserInformation((prevState) => ({
-      ...prevState,
-      [field]: value,
-    }));
   };
 
   return (
     <ScrollView>
       <LayoutForm>
         <SafeAreaView>
-          <View>
-            <TextInput
-              label="Username"
-              autofocus={true}
-              name={"username"}
-              value={userInformation.username}
-              onChangeText={(value) => onHandleChange(value, "username")}
-            />
-            <TextInput
-              autoCorrect={false}
-              label="Password"
-              secureTextEntry={true}
-              name={"password"}
-              value={userInformation.password}
-              onChangeText={(value) => onHandleChange(value, "password")}
-            />
-            <TextInput
-              label="First Name"
-              name={"firstName"}
-              value={userInformation.firstName}
-              onChangeText={(value) => onHandleChange(value, "firstName")}
-            />
-            <TextInput
-              label="Last Name"
-              name={"lastName"}
-              value={userInformation.lastName}
-              onChangeText={(value) => onHandleChange(value, "lastName")}
-            />
-            <TextInput
-              label="Email"
-              name={"email"}
-              autoCorrect={false}
-              value={userInformation.email}
-              onChangeText={(value) => onHandleChange(value, "email")}
-            />
-            <TextInputPhoneNumber
-              label="Pone Number"
-              name={"phoneNumber"}
-              value={userInformation.phoneNumber}
-              onChangeText={onHandleChange}
-            />
-            <Calendar
-              style={styles.calendar}
-              name={"birthday"}
-              value={userInformation.birthday}
-              onChangeText={onHandleChange}
-            />
-          </View>
-          <Button
-            label={"Agree & Join"}
-            icon={"login"}
-            action={onHandleSignup}
-          />
+          <Formik
+            initialValues={{
+              email: "",
+              password: "",
+              firstName: "",
+              lastName: "",
+              birthday: getMinimumRegistrationAge(),
+              username: "",
+              phoneNumber: "",
+            }}
+            validationSchema={signUpSchema}
+            onSubmit={onHandleSignup}
+          >
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+            }) => (
+              <View>
+                <TextInput
+                  label="Username"
+                  autofocus={true}
+                  name="username"
+                  value={values.username}
+                  onChangeText={handleChange("username")}
+                  onBlur={handleBlur("username")}
+                  error={touched.username && errors.username}
+                />
+                <TextInput
+                  autoCorrect={false}
+                  label="Password"
+                  secureTextEntry={true}
+                  name="password"
+                  value={values.password}
+                  onChangeText={handleChange("password")}
+                  onBlur={handleBlur("password")}
+                  error={touched.password && errors.password}
+                />
+                <TextInput
+                  label="First Name"
+                  name="firstName"
+                  value={values.firstName}
+                  onChangeText={handleChange("firstName")}
+                  onBlur={handleBlur("firstName")}
+                  error={touched.firstName && errors.firstName}
+                />
+                <TextInput
+                  label="Last Name"
+                  name="lastName"
+                  value={values.lastName}
+                  onChangeText={handleChange("lastName")}
+                  onBlur={handleBlur("lastName")}
+                  error={touched.lastName && errors.lastName}
+                />
+                <TextInput
+                  label="Email"
+                  name="email"
+                  autoCorrect={false}
+                  value={values.email}
+                  onChangeText={handleChange("email")}
+                  onBlur={handleBlur("email")}
+                  error={touched.email && errors.email}
+                />
+                <TextInputPhoneNumber
+                  label="Phone Number"
+                  name="phoneNumber"
+                  value={values.phoneNumber}
+                  onChangeText={handleChange("phoneNumber")}
+                  onBlur={handleBlur("phoneNumber")}
+                  error={touched.phoneNumber && errors.phoneNumber}
+                />
+                <Calendar
+                  style={styles.calendar}
+                  name="birthday"
+                  value={values.birthday}
+                  onChangeText={handleChange("birthday")}
+                  onBlur={handleBlur("birthday")}
+                  error={touched.birthday && errors.birthday}
+                />
+                <Button
+                  label="Agree & Join"
+                  icon="login"
+                  action={handleSubmit}
+                />
+              </View>
+            )}
+          </Formik>
           <View
             style={{
               marginTop: 20,
@@ -136,6 +155,7 @@ export const SignUp = ({ navigation }) => {
     </ScrollView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

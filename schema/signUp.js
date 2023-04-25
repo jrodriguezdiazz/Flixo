@@ -11,10 +11,11 @@ export const signUpSchema = Yup.object().shape({
       "unique-username",
       "Username is already taken",
       async function (value) {
-        return await checkIfFieldValueExistsInUsersCollection(
+        const isAvailable = await checkIfFieldValueExistsInUsersCollection(
           "username",
           value
         );
+        return isAvailable;
       }
     ),
   password: Yup.string()
@@ -30,7 +31,12 @@ export const signUpSchema = Yup.object().shape({
     .email("Invalid email")
     .required("Email is required")
     .test("unique-email", "Email is already taken", async function (value) {
-      return await checkIfFieldValueExistsInUsersCollection("email", value);
+      const isAvailable = await checkIfFieldValueExistsInUsersCollection(
+        "email",
+        value
+      );
+      console.log({ isAvailable });
+      return isAvailable;
     }),
   phoneNumber: Yup.string()
     .required("Phone number is required")
@@ -39,10 +45,11 @@ export const signUpSchema = Yup.object().shape({
       "unique-phone-number",
       "Phone number is already taken",
       async function (value) {
-        return await checkIfFieldValueExistsInUsersCollection(
+        const isAvailable = await checkIfFieldValueExistsInUsersCollection(
           "phoneNumber",
           value
         );
+        return isAvailable;
       }
     ),
   birthday: Yup.date()

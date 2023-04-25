@@ -7,13 +7,11 @@ import { ErrorMessage } from "../commons/ErrorMessage";
 export const TextInput = ({
   isOutlineTransparent = false,
   isValid = true,
-  errorMessage,
+  error,
   secureTextEntry,
-  isTouched = false,
   ...props
 }) => {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(secureTextEntry);
-  const showError = isTouched && errorMessage;
   const { colors } = theme;
   return (
     <View style={styles.container}>
@@ -34,7 +32,7 @@ export const TextInput = ({
         }
         {...props}
       />
-      {showError && <ErrorMessage message={errorMessage} />}
+      {error && <ErrorMessage message={error} />}
     </View>
   );
 };

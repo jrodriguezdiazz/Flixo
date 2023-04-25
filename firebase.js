@@ -165,14 +165,34 @@ export const updateUserInfo = async (user) => {
 };
 
 export const checkIfFieldValueExistsInUsersCollection = async (
-  fields,
+  field,
   value
 ) => {
   try {
-    const usersRef = database.collection("users");
-    const querySnapshot = await usersRef.where(fields, "==", value).get();
+    if (!value) {
+      return true;
+    }
 
-    return querySnapshot.empty;
+    const usersRef = database.collection("users");
+    const query = usersRef.where(field, "==", value);
+
+    const result = await new Promise((resolve, reject) => {
+      const unsubscribe = query.onSnapshot(
+        (querySnapshot) => {
+          unsubscribe();
+          resolve(querySnapshot.empty);
+        },
+        (error) => {
+          console.error(
+            "Error checking if field value exists in users collection:",
+            error
+          );
+          reject(error);
+        }
+      );
+    });
+
+    return result;
   } catch (error) {
     console.error(
       "Error checking if field value exists in users collection:",
