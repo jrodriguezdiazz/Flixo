@@ -3,23 +3,17 @@ import { useState } from "react";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import { Divider } from "react-native-elements";
 import validUrl from "valid-url";
-import { addPostByForm } from "../../firebase";
 
 import { uploadPostSchema } from "../../schema/newPost";
-import { useAuthStore } from "../../stores/useAuthStore";
 import { DEFAULT_IMAGE, theme } from "../../utils/constant";
 import { Button } from "../commons/Button";
 
-export const FormikPostUploader = ({ navigation }) => {
+export const FormikPostUploader = () => {
   const { colors } = theme;
-  const { user } = useAuthStore((state) => ({
-    user: state.user,
-  }));
 
   const [thumbnail, setThumbnail] = useState(DEFAULT_IMAGE);
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      await addPostByForm(values, user.userId);
       setThumbnail(DEFAULT_IMAGE);
       resetForm();
     } catch (error) {
@@ -77,7 +71,7 @@ export const FormikPostUploader = ({ navigation }) => {
               orientation={"vertical"}
             />
             <Button
-              action={() => navigation.push("AddPostScreen")}
+              action={() => console.log("")}
               label={"Take a photo!"}
               icon={"camera-enhance-outline"}
             />
