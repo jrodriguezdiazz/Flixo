@@ -1,8 +1,8 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { StyleSheet, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { ChatList } from "../../screens/ChatList";
 import { HomeScreen } from "../../screens/Home";
+import { MessageScreen } from "../../screens/MessageScreen";
 import { NewPost } from "../../screens/NewPost";
 import { NotificationScreen } from "../../screens/Notification";
 
@@ -59,7 +59,7 @@ export const Navbar = ({ navigation }) => {
         />
         <Tab.Screen
           name="Messaging"
-          component={ChatList}
+          component={MessageScreen}
           options={{ tabBarLabel: "Messaging" }}
           initialParams={{ navigation }}
         />

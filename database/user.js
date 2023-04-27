@@ -1,4 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
+// getUsersListExcludingCurrentUser.js
 import {
   endAt,
   get,
@@ -304,4 +305,35 @@ export const watchUserUpdates = (userId, onUserUpdate) => {
   });
 
   return unsubscribe;
+};
+
+export const getUsersListExcludingCurrentUser = (
+  currentUserId,
+  onUsersListUpdated
+) => {
+  const usersRef = ref(database, "users");
+
+  const onValueChange = onValue(usersRef, (snapshot) => {
+    const usersData = snapshot.val();
+    const usersList = [];
+
+    for (const userId in usersData) {
+      if (userId !== currentUserId) {
+        const user = usersData[userId];
+        usersList.push({
+          userId: userId,
+          header: user.username,
+          profilePicture: user.profilePicture,
+          goTo: userId,
+          date: "2023-04-03T10:00",
+          message: "",
+          seen: false,
+        });
+      }
+    }
+
+    onUsersListUpdated(usersList);
+  });
+
+  return () => off(usersRef, "value", onValueChange);
 };
